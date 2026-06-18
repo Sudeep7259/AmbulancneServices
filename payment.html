@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - Sri Siddharoodha Ambulance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: var(--bg-surface);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .payment-header h1 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .order-summary {
+            background: var(--bg-subtle);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin-bottom: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .summary-item.total {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .payment-method {
+            margin-bottom: 32px;
+        }
+
+        .payment-method h3 {
+            margin-bottom: 16px;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .payment-option {
+            flex: 1;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .payment-option.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-section {
+            display: none;
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .success-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-overlay.active {
+            display: flex;
+        }
+
+        .success-overlay.active .success-card {
+            transform: scale(1);
+        }
+
+        .success-icon {
+            color: #10b981;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="logo-icon">
+                    <path
+                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                    <circle cx="7" cy="17" r="2" />
+                    <path d="M9 17h6" />
+                    <circle cx="17" cy="17" r="2" />
+                    <path d="M12 7v4" />
+                    <path d="M10 9h4" />
+                </svg>
+                <span>Sri Siddharoodha Ambulance</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="payment-container">
+            <div class="payment-header">
+                <h1>Secure Checkout</h1>
+                <p class="text-muted">Complete your equipment rental booking</p>
+            </div>
+
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span id="equipment-name-display">Medical Equipment Rental</span>
+                    <span>Advance Booking</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total Deposit</span>
+                    <span>₹2000.00</span>
+                </div>
+            </div>
+
+            <form id="payment-form">
+                <div class="payment-method">
+                    <h3>Select Payment Method</h3>
+
+                    <div class="payment-options">
+                        <label class="payment-option active" id="label-card">
+                            <input type="radio" name="paymentType" value="card" checked
+                                onchange="togglePayment('card')">
+                            Card
+                        </label>
+                        <label class="payment-option" id="label-upi">
+                            <input type="radio" name="paymentType" value="upi" onchange="togglePayment('upi')">
+                            UPI
+                        </label>
+                        <label class="payment-option" id="label-cod">
+                            <input type="radio" name="paymentType" value="cod" onchange="togglePayment('cod')">
+                            Cash on Delivery
+                        </label>
+                    </div>
+
+                    <!-- Card Section -->
+                    <div id="section-card" class="payment-section active">
+                        <div class="form-group">
+                            <label for="cardName">Name on Card</label>
+                            <input type="text" id="cardName" placeholder="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expDate">Expiry Date</label>
+                                <input type="text" id="expDate" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UPI Section -->
+                    <div id="section-upi" class="payment-section">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <img src="qr.png" alt="PhonePe QR Code"
+                                style="max-width: 250px; display: block; margin: 0 auto 16px auto; border: 1px solid rgba(0,0,0,0.1); padding: 12px; border-radius: 8px; background: white;">
+                            <p style="font-weight: 600; font-size: 1.1rem; color: #1e293b; margin-bottom: 4px;">UPI
+                                Name: PREETI CHANDRU SATTU</p>
+                            <p style="color: #64748b; font-size: 0.95rem;">Scan & Pay Using PhonePe App</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="upiRef">Enter UTR / Transaction Reference Number</label>
+                            <input type="text" id="upiRef" placeholder="e.g. 123456789012">
+                        </div>
+                        <div class="form-group">
+                            <label for="upiScreenshot">Upload Payment Screenshot</label>
+                            <input type="file" id="upiScreenshot" accept="image/*" style="background: white;">
+                        </div>
+                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">After scanning and paying, please
+                            enter the reference number and attach the screenshot above.</p>
+                    </div>
+
+                    <!-- COD Section -->
+                    <div id="section-cod" class="payment-section">
+                        <p
+                            style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            You have selected Cash on Delivery. Please keep ₹2000.00 ready at the time of equipment
+                            delivery.</p>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn btn-primary btn-large" style="width: 100%;">
+                    Pay ₹2000.00 Securely
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <div id="success-overlay" class="success-overlay">
+        <div class="success-card">
+            <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <h2>Booking Confirmed!</h2>
+            <p style="margin: 16px 0; color: #64748b;">Your payment was successful and your order is being processed.
+            </p>
+            <p style="margin-bottom: 24px; color: #64748b;">Our delivery executive will contact you shortly.</p>
+            <a href="index.html" class="btn btn-primary">Return to Home</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePayment(type) {
+            // Update labels
+            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('active'));
+            document.getElementById('label-' + type).classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.payment-section').forEach(el => el.classList.remove('active'));
+            document.getElementById('section-' + type).classList.add('active');
+
+            // Update button text
+            const btn = document.getElementById('submit-btn');
+            if (type === 'cod') {
+                btn.textContent = 'Confirm Order (Pay on Delivery)';
+            } else {
+                btn.textContent = 'Pay ₹2000.00 Securely';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve equipment name from localStorage
+            const equipment = localStorage.getItem('booking_equipment');
+            if (equipment) {
+                document.getElementById('equipment-name-display').textContent = equipment + ' Rental';
+            }
+
+            // Handle mock payment submission
+            const form = document.getElementById('payment-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Determine payment type
+                const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+                
+                // Validate UPI screenshot if UPI is selected
+                if (paymentType === 'upi') {
+                    const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
+                    if (!hasScreenshot) {
+                        alert("Please upload the payment screenshot before proceeding.");
+                        return; // Stop form submission
+                    }
+                }
+
+                // Retrieve customer details
+                const custName = localStorage.getItem('booking_name') || 'Customer';
+                const custPhone = localStorage.getItem('booking_phone') || 'N/A';
+                const custAddress = localStorage.getItem('booking_address') || 'N/A';
+                const equip = localStorage.getItem('booking_equipment') || 'Equipment';
+
+                // Show success overlay first
+                document.getElementById('success-overlay').classList.add('active');
+
+                let paymentStatus = "Payment of ₹2000.00 Successful ✅";
+                if (paymentType === 'cod') {
+                    paymentStatus = "Cash on Delivery (₹2000.00 due) 🚚";
+                } else if (paymentType === 'upi') {
+                    const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
+                    const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
+                    paymentStatus = `UPI Payment of ₹2000.00 Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
+                }
+
+                // Construct WhatsApp message
+                const ownerNumber = "919060066139";
+                const message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodedMessage}`;
+
+                // Redirect directly to WhatsApp after a brief delay so they see the success screen
+                setTimeout(() => {
+                    window.location.href = whatsappUrl;
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>

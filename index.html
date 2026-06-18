@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Siddharoodha Ambulance Services</title>
+    <meta name="description" content="Premium, rapid, and compassionate ambulance and medical transport services.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="logo-icon">
+                    <path
+                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                    <circle cx="7" cy="17" r="2" />
+                    <path d="M9 17h6" />
+                    <circle cx="17" cy="17" r="2" />
+                    <path d="M12 7v4" />
+                    <path d="M10 9h4" />
+                </svg>
+                <span>Sri Siddharoodha Ambulance & Health Care  Services</span>
+            </div>
+            <nav class="nav desktop-nav">
+                <button id="lang-toggle" class="btn notranslate"
+                    style="background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-weight: 600; cursor: pointer; margin-right: 16px;"
+                    onclick="toggleLanguage()">ಕನ್ನಡ</button>
+                <button class="btn btn-outline"
+                    style="margin-right: 16px; border: 1px solid var(--primary); color: var(--primary); padding: 6px 16px; border-radius: 20px; font-weight: 600; background: transparent; cursor: pointer;"
+                    onclick="openServicesModal()">Our Services</button>
+                <a href="tel:9060066139" class="btn btn-primary">Call Now</a>
+            </nav>
+            <button class="menu-toggle-btn mobile-only" onclick="toggleDrawer()" aria-label="Toggle Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Side Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div class="side-drawer" id="side-drawer">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <button class="drawer-close-btn" onclick="toggleDrawer()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="drawer-content">
+            <button id="lang-toggle-mobile" class="btn notranslate" style="margin: 16px 24px; border: 1px solid var(--primary); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-weight: 600; background: transparent; cursor: pointer;" onclick="toggleLanguage(); toggleDrawer();">ಕನ್ನಡ</button>
+            <button class="drawer-link" style="background:none; border:none; text-align:left; font-size:1rem; cursor:pointer;" onclick="openServicesModal(); toggleDrawer();">Our Services</button>
+            <a href="#ambulances" class="drawer-link" onclick="toggleDrawer()">Ambulance Fleet</a>
+            <a href="#equipments" class="drawer-link" onclick="toggleDrawer()">Medical Equipments</a>
+            <a href="tel:9060066139" class="btn btn-primary" style="margin: auto 24px 24px;">Call Now: 9060066139</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-text">
+                    <span class="badge badge-pulse">24/7 Rapid Response</span>
+                    <h1 class="hero-title">Precision Medical Transport When You Need It Most</h1>
+                    <p class="hero-subtitle">From basic life support to intensive care units on the move. We deliver
+                        unparalleled medical expertise with absolute dignity and speed.</p>
+                    <div class="hero-actions">
+                        <a href="tel:9060066139" class="btn btn-primary btn-large">Call 9060066139</a>
+                        <a href="#services" class="btn btn-secondary btn-large">View Services</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <div class="hero-slider" id="hero-slider">
+                            <img src="omni_ambulance.png" alt="Omni Ambulance" class="hero-ambulance-img slide active">
+                            <img src="mini_eco_ambulance.png" alt="Mini Eco Ambulance" class="hero-ambulance-img slide">
+                            <img src="eco_ambulance.png" alt="Eco Ambulance" class="hero-ambulance-img slide">
+                            <img src="tt_ambulance.png" alt="TT Ambulance" class="hero-ambulance-img slide">
+                        </div>
+                        <div class="glass-card hero-glass-card floating-card">
+                            <div class="pulse-ring"></div>
+                            <svg class="hero-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                            <div class="hero-stat">
+                                <span class="stat-value">&lt; 8 min</span>
+                                <span class="stat-label">Response Time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ambulances" class="ambulances-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title">Our Ambulance Fleet</h2>
+                    <p class="section-desc">Select from our range of specialized vehicles for prompt and safe medical
+                        transport.</p>
+                </div>
+                <div class="ambulances-grid">
+                    <!-- Omni Ambulance -->
+                    <div class="ambulance-card animate-on-scroll animate-delay-100">
+                        <div class="ambulance-img-wrapper card-slider" id="omni-card-slider">
+                            <img src="omni_ambulance.png" alt="Omni Ambulance" class="card-slide active">
+                            <img src="omni_interior.png" alt="Omni Ambulance Interior" class="card-slide">
+                        </div>
+                        <div class="ambulance-card-content">
+                            <h3>Omini Ambulance</h3>
+                            <p>Compact and agile, perfect for navigating narrow city streets quickly.</p>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-primary btn-book"
+                                    onclick="openAmbulanceModal('Omni Ambulance')">Book Now</button>
+                                <a href="tel:9060066139" class="btn btn-emergency">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                    Emergency Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TT Ambulance -->
+                    <div class="ambulance-card animate-on-scroll animate-delay-200">
+                        <div class="ambulance-img-wrapper card-slider" id="tt-card-slider">
+                            <img src="tt_ambulance.png" alt="TT Ambulance" class="card-slide active">
+                            <img src="tt_interior.png" alt="TT Ambulance Interior" class="card-slide">
+                        </div>
+                        <div class="ambulance-card-content">
+                            <h3>TT Ambulance</h3>
+                            <p>Spacious and well-equipped for comfortable inter-city medical transfers.</p>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-primary btn-book"
+                                    onclick="openAmbulanceModal('TT Ambulance')">Book Now</button>
+                                <a href="tel:9060066139" class="btn btn-emergency">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                    Emergency Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Eco Ambulance -->
+                    <div class="ambulance-card animate-on-scroll animate-delay-300">
+                        <div class="ambulance-img-wrapper card-slider" id="eco-card-slider">
+                            <img src="eco_ambulance.png" alt="Eco Ambulance" class="card-slide active">
+                            <img src="eco_interior.png" alt="Eco Ambulance Interior" class="card-slide">
+                        </div>
+                        <div class="ambulance-card-content">
+                            <h3>Eco Ambulance</h3>
+                            <p>Standard reliable transport for non-critical patient movement.</p>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-primary btn-book"
+                                    onclick="openAmbulanceModal('Eco Ambulance')">Book Now</button>
+                                <a href="tel:9060066139" class="btn btn-emergency">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                    Emergency Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mini Eco Ambulance -->
+                    <div class="ambulance-card animate-on-scroll animate-delay-400">
+                        <div class="ambulance-img-wrapper card-slider" id="mini-eco-card-slider">
+                            <img src="mini_eco_ambulance.png" alt="Mini Eco Ambulance" class="card-slide active">
+                            <img src="mini_eco_interior.png" alt="Mini Eco Ambulance Interior" class="card-slide">
+                        </div>
+                        <div class="ambulance-card-content">
+                            <h3>Mini Eco Ambulance</h3>
+                            <p>Economical option for safe, localized medical transportation.</p>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-primary btn-book"
+                                    onclick="openAmbulanceModal('Mini Eco Ambulance')">Book Now</button>
+                                <a href="tel:9060066139" class="btn btn-emergency">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                        </path>
+                                    </svg>
+                                    Emergency Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipments" class="equipments-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2 class="section-title">Our Equipments for Rent</h2>
+                    <p class="section-desc">State-of-the-art medical equipment for patient safety and critical care.</p>
+                </div>
+                <div class="equipments-grid">
+                    <div class="equipment-card"><img src="media__1781014254558.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Oxygen Cylinder')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014254776.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Oxygen Concentrator')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014254860.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('CPAP Machine')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014254927.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('BiPAP Machine')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014254952.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Multi Para Monitor')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014610878.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Nebulizer Machine')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014610928.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Pulse Oximeter')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014611016.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Suction Machine')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014611104.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('BP Machine')">Book Now</button>
+                    </div>
+                    <div class="equipment-card"><img src="media__1781014611115.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Syringe Pump')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781014748370.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Wheel Chair')">Book Now</button>
+                    </div>
+                    <div class="equipment-card"><img src="media__1781014748444.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Hospital Bed')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781015045463.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Air Mattress')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781015045483.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Full Face & Nasal Mask')">Book
+                            Now</button></div>
+                    <div class="equipment-card"><img src="media__1781015045554.png" alt="Equipment"><button
+                            class="btn btn-primary btn-book" onclick="openBookingModal('Dead Body Freezer Box')">Book
+                            Now</button></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card animate-on-scroll">
+                    <div class="cta-content">
+                        <h2 class="cta-title">Need Immediate Medical Transport?</h2>
+                        <p>Our dispatch team is standing by 24/7 to coordinate your medical transport needs.</p>
+                    </div>
+                    <a href="tel:7259663197" class="btn btn-primary btn-large cta-btn">Call: 9060066139</a>
+                </div>
+            </div>
+        </section>
+        <!-- Booking Modal -->
+        <div id="booking-modal" class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+                <h3>Book Equipment</h3>
+                <p id="modal-equipment-name" class="modal-subtitle">Equipment Name</p>
+                <form id="booking-form" class="booking-form">
+                    <div class="form-group">
+                        <label for="customerName">Full Name</label>
+                        <input type="text" id="customerName" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" required placeholder="1234567890">
+                    </div>
+                    <div class="form-group">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label for="deliveryAddress" style="margin-bottom: 0;">Delivery Address</label>
+                            <button type="button" id="btn-current-location"
+                                style="padding: 4px 8px; font-size: 0.8rem; background: #f1f5f9; color: #2563eb; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="10" r="3" />
+                                    <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z" />
+                                </svg>
+                                Use Current Location
+                            </button>
+                        </div>
+                        <textarea id="deliveryAddress" rows="3" required
+                            placeholder="Enter full address details or click the button to use current location"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Confirm Order</button>
+                </form>
+            </div>
+        </div>
+        <!-- Ambulance Booking Modal -->
+        <div id="ambulance-booking-modal" class="modal-overlay">
+            <div class="modal-content ambulance-modal-content">
+                <button class="modal-close" onclick="closeAmbulanceModal()">&times;</button>
+                <h3>Book an Ambulance</h3>
+                <p id="modal-ambulance-name" class="modal-subtitle">Selected: Omni Ambulance</p>
+
+                <div id="ambulance-booking-success" class="booking-success" style="display: none;">
+                    <div class="success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h4>Booking Confirmed!</h4>
+                    <p>Your ambulance request has been received. Our dispatch team will contact you immediately.</p>
+                    <button type="button" class="btn btn-primary" onclick="closeAmbulanceModal()"
+                        style="margin-top: 16px;">Close</button>
+                </div>
+
+                <form id="ambulance-booking-form" class="booking-form">
+                    <div class="form-group">
+                        <label for="ambType">Ambulance Type</label>
+                        <select id="ambType" required class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                            <option value="Omni Ambulance">Omni Ambulance</option>
+                            <option value="TT Ambulance">TT Ambulance</option>
+                            <option value="Eco Ambulance">Eco Ambulance</option>
+                            <option value="Mini Eco Ambulance">Mini Eco Ambulance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" id="patientName" required placeholder="Full Name" class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="tel" id="mobileNumber" required placeholder="10-digit mobile number"
+                            class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label for="pickupLocation" style="margin-bottom: 0;">Pickup Location</label>
+                            <button type="button" id="btn-pickup-location"
+                                style="padding: 4px 8px; font-size: 0.8rem; background: #f1f5f9; color: #2563eb; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s ease;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="10" r="3" />
+                                    <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z" />
+                                </svg>
+                                Use Current Location
+                            </button>
+                        </div>
+                        <input type="text" id="pickupLocation" required placeholder="e.g., Hospital or Home address"
+                            class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
+                        <label for="destLocation">Destination Location</label>
+                        <input type="text" id="destLocation" required placeholder="e.g., Destination Hospital"
+                            class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDateTime">Date & Time</label>
+                        <input type="datetime-local" id="bookingDateTime" required class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
+                        <label for="additionalNotes">Additional Notes (Optional)</label>
+                        <textarea id="additionalNotes" rows="2" placeholder="Any specific requirements..."
+                            class="form-control"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Confirm
+                        Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- General Services Modal -->
+        <div class="modal-overlay" id="general-services-modal" onclick="if(event.target === this) closeServicesModal()">
+            <div class="modal-content" style="max-width: 600px;">
+                <button class="modal-close" onclick="closeServicesModal()">&times;</button>
+                <h3>Our General Ambulance Services</h3>
+                <p class="modal-subtitle">Comprehensive care for every medical requirement</p>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px; max-height: 60vh; overflow-y: auto; padding-right: 8px;">
+                    <!-- Service 1 -->
+                    <div
+                        style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <h4
+                            style="color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                            Emergency Response (24/7)
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Rapid dispatch for critical emergencies
+                            requiring immediate medical attention and transport.</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div
+                        style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <h4
+                            style="color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="15" height="10" x="3" y="5" rx="2" />
+                                <path d="M18 10h1.5a2.5 2.5 0 0 1 2.5 2.5V15h-4" />
+                                <circle cx="17.5" cy="18.5" r="2.5" />
+                                <circle cx="6.5" cy="18.5" r="2.5" />
+                            </svg>
+                            Inter-Hospital Transfer
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Safe, stable patient transfers between
+                            medical facilities with continuous monitoring.</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div
+                        style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <h4
+                            style="color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#e11d48" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                                <path d="M12 9v4" />
+                                <path d="M12 17h.01" />
+                            </svg>
+                            Basic & Advanced Life Support
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Fully equipped BLS and ALS units for
+                            patients needing foundational or intensive care.</p>
+                    </div>
+                    <!-- Service 4 -->
+                    <div
+                        style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <h4
+                            style="color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            Specialized Event Standby
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Proactive on-site medical coverage for
+                            public gatherings, sporting events, and functions.</p>
+                    </div>
+                    <!-- Service 5 -->
+                    <div
+                        style="background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <h4
+                            style="color: var(--primary-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Dead Body Transport
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Respectful, dignified, and prompt
+                            transportation of deceased individuals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="logo-icon">
+                            <path
+                                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                            <circle cx="7" cy="17" r="2" />
+                            <path d="M9 17h6" />
+                            <circle cx="17" cy="17" r="2" />
+                            <path d="M12 7v4" />
+                            <path d="M10 9h4" />
+                        </svg>
+                        <span>Sri Siddharoodha Ambulance</span>
+                    </div>
+                    <p class="footer-desc">Setting the standard in professional medical transportation and pre-hospital
+                        care.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Company</h3>
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                    </div>
+                    <div class="link-group">
+                        <h3>Contact</h3>
+                        <a href="tel:9060066139">9060066139</a>
+                        <a href="tel:7090609139">7090609139</a>
+                        <a href="tel:6364560258">6364560258</a>
+                    </div>
+                    <div class="link-group">
+                        <h3>Legal</h3>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sri Siddharoodha Ambulance Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Data and Application Logic -->
+    <script src="services-data.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Language Translation Script -->
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,kn', autoDisplay: false }, 'google_translate_element');
+        }
+
+        function toggleLanguage() {
+            var select = document.querySelector('select.goog-te-combo');
+            if (select) {
+                var isKn = document.cookie.indexOf('googtrans=/en/kn') !== -1 || select.value === 'kn';
+                if (isKn) {
+                    select.value = 'en';
+                    if (select.value !== 'en') select.value = '';
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    document.getElementById('lang-toggle').innerText = 'ಕನ್ನಡ';
+                    document.cookie = 'googtrans=/en/en; path=/; domain=' + window.location.hostname;
+                    document.cookie = 'googtrans=/en/en; path=/';
+                } else {
+                    select.value = 'kn';
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    document.getElementById('lang-toggle').innerText = 'English';
+                }
+            } else {
+                setTimeout(toggleLanguage, 500);
+            }
+        }
+
+        function checkInitialLanguage() {
+            if (document.cookie.indexOf('googtrans=/en/kn') !== -1) {
+                var toggleBtn = document.getElementById('lang-toggle');
+                if (toggleBtn) {
+                    toggleBtn.innerText = 'English';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkInitialLanguage();
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .goog-te-banner-frame { display: none !important; }
+                body { top: 0px !important; }
+                .skiptranslate { display: none !important; }
+                #goog-gt-tt { display: none !important; }
+                font { background: transparent !important; color: inherit !important; box-shadow: none !important; }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
