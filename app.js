@@ -281,7 +281,7 @@ Please confirm the booking.`;
             const encodedMessage = encodeURIComponent(message);
             
             // Owner's WhatsApp number (with country code +91)
-            const ownerNumber = "919060066139"; 
+            const ownerNumber = "917090609139"; 
             
             // Open WhatsApp link in a new tab
             window.open(`https://wa.me/${ownerNumber}?text=${encodedMessage}`, '_blank');
