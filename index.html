@@ -498,6 +498,198 @@
             </div>
         </div>
 
+        <!-- Terms & Conditions Modal -->
+        <div class="modal-overlay" id="terms-modal" onclick="if(event.target === this) closeTermsModal()">
+            <div class="modal-content" style="max-width: 600px;">
+                <button class="modal-close" onclick="closeTermsModal()">&times;</button>
+                <h3>Terms & Conditions</h3>
+                <p class="modal-subtitle" style="margin-bottom: 16px;">By booking our ambulance service, you agree to these Terms & Conditions.</p>
+
+                <div class="terms-list-container"
+                    style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px; max-height: 60vh; overflow-y: auto; padding-right: 8px; text-align: left;">
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Ambulance availability depends on vehicle availability, traffic, weather, and road conditions.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Customers must provide accurate booking and patient information.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Service charges vary based on distance, ambulance type, and medical assistance required.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Cancellation charges may apply after ambulance dispatch.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Arrival times may vary due to traffic, road closures, or emergencies.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Our staff provide transportation and basic medical support; hospital treatment remains the responsibility of healthcare professionals.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Customers must treat staff and equipment respectfully. Damage caused may result in additional charges.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Patient information is kept confidential and used only for service-related purposes.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">We are not responsible for delays or interruptions caused by circumstances beyond our control.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">False bookings, misuse of services, or unauthorized website activities are prohibited.</p>
+                    </div>
+                    <div class="terms-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Terms & Conditions may be updated at any time without prior notice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Modal -->
+        <div class="modal-overlay" id="privacy-modal" onclick="if(event.target === this) closePrivacyModal()">
+            <div class="modal-content" style="max-width: 600px;">
+                <button class="modal-close" onclick="closePrivacyModal()">&times;</button>
+                <h3>Privacy Policy</h3>
+                <p class="modal-subtitle" style="margin-bottom: 16px;">Your privacy is important to us. This policy outlines how we handle your personal information.</p>
+
+                <div class="privacy-list-container"
+                    style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px; max-height: 60vh; overflow-y: auto; padding-right: 8px; text-align: left;">
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">We collect basic information such as your name, phone number, email, pickup/drop location, and booking details to provide ambulance services.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Your information is used only for booking management, customer support, and service improvement.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">We do not sell or share your personal information with third parties except when required by law or necessary to provide our services.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">We take reasonable measures to keep your information secure and protected.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Our website may use cookies to improve your browsing experience.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Third-party links (WhatsApp, Google Maps, Facebook, etc.) have their own privacy policies, and we are not responsible for their practices.</p>
+                    </div>
+                    <div class="privacy-item" style="display: flex; gap: 12px; align-items: flex-start; background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">We may update this Privacy Policy from time to time. Changes will be posted on this page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Us Modal -->
+        <div class="modal-overlay" id="about-modal" onclick="if(event.target === this) closeAboutModal()">
+            <div class="modal-content" style="max-width: 600px;">
+                <button class="modal-close" onclick="closeAboutModal()">&times;</button>
+                <h3>About Us</h3>
+                <p class="modal-subtitle" style="margin-bottom: 20px;">Sri Siddharoodha Ambulance & Health Care Services</p>
+
+                <div class="about-content-container"
+                    style="display: flex; flex-direction: column; gap: 16px; max-height: 60vh; overflow-y: auto; padding-right: 8px; text-align: left;">
+                    
+                    <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        Shri Siddaroodha Ambulance Service provides reliable and professional 24&times;7 Emergency Medical Transportation Services. Our mission is to ensure safe, fast, and comfortable patient transportation during emergencies and non-emergency situations.
+                    </p>
+                    
+                    <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        We are committed to delivering high-quality ambulance services with trained staff and essential medical support. Patient safety, timely response, and compassionate care are our top priorities.
+                    </p>
+
+                    <div style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-md); border: 1px dashed var(--primary); text-align: center; margin: 8px 0;">
+                        <p style="margin: 0; font-style: italic; font-weight: 600; color: var(--primary-dark); font-size: 1rem;">
+                            "Patient Safety and Timely Service Are Our Highest Priorities."
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-dark); margin-bottom: 12px; font-size: 1.1rem; border-bottom: 2px solid rgba(37, 99, 235, 0.1); padding-bottom: 6px;">Our Services</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> 24&times;7 Emergency Ambulance
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> ICU & Ventilator Ambulance
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Oxygen Support Ambulance
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Patient Transfer Services
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Hospital-to-Hospital Transfer
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Wheelchair Facility
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Freezer Box Facility
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem;">
+                                <span style="color: var(--primary); font-size: 1.2rem; line-height: 1;">•</span> Medical Transportation Services
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="footer">
@@ -524,7 +716,7 @@
                 <div class="footer-links">
                     <div class="link-group">
                         <h3>Company</h3>
-                        <a href="#">About</a>
+                        <a href="#" onclick="openAboutModal(event)">About Us</a>
                         <a href="#">Careers</a>
                     </div>
                     <div class="link-group">
@@ -534,8 +726,8 @@
                     </div>
                     <div class="link-group">
                         <h3>Legal</h3>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <a href="#" onclick="openPrivacyModal(event)">Privacy Policy</a>
+                        <a href="#" onclick="openTermsModal(event)">Terms & Conditions</a>
                     </div>
                 </div>
             </div>

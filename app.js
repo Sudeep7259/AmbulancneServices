@@ -390,6 +390,42 @@ window.closeServicesModal = function() {
     if (modal) modal.classList.remove('active');
 };
 
+// Terms & Conditions Modal Logic
+window.openTermsModal = function(e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('terms-modal');
+    if (modal) modal.classList.add('active');
+};
+
+window.closeTermsModal = function() {
+    const modal = document.getElementById('terms-modal');
+    if (modal) modal.classList.remove('active');
+};
+
+// Privacy Policy Modal Logic
+window.openPrivacyModal = function(e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('privacy-modal');
+    if (modal) modal.classList.add('active');
+};
+
+window.closePrivacyModal = function() {
+    const modal = document.getElementById('privacy-modal');
+    if (modal) modal.classList.remove('active');
+};
+
+// About Us Modal Logic
+window.openAboutModal = function(e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('about-modal');
+    if (modal) modal.classList.add('active');
+};
+
+window.closeAboutModal = function() {
+    const modal = document.getElementById('about-modal');
+    if (modal) modal.classList.remove('active');
+};
+
 // Scroll Animation Observer
 document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
