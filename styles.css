@@ -825,6 +825,109 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
 }
 
+/* Footer Social Badges */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.social-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.social-badge svg {
+  flex-shrink: 0;
+}
+
+.whatsapp-badge {
+  background: rgba(37, 211, 102, 0.1);
+  color: #25D366;
+  border-color: rgba(37, 211, 102, 0.15);
+}
+
+.whatsapp-badge:hover {
+  background: #25D366;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.justdial-badge {
+  background: rgba(255, 106, 0, 0.1);
+  color: #ff6a00;
+  border-color: rgba(255, 106, 0, 0.15);
+}
+
+.justdial-badge:hover {
+  background: #ff6a00;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 106, 0, 0.3);
+}
+
+.justdial-badge:hover svg rect {
+  fill: white;
+}
+
+.justdial-badge:hover svg text {
+  fill: #ff6a00;
+}
+
+/* Contact Footer Link */
+.contact-footer-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-footer-link svg {
+  color: var(--primary-light);
+  transition: var(--transition);
+}
+
+.contact-footer-link:hover svg {
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Hero Justdial Reviews Button */
+.hero-jd-btn {
+  border: 1px solid rgba(255, 106, 0, 0.3) !important;
+  color: #ff6a00 !important;
+  background: rgba(255, 106, 0, 0.05) !important;
+  box-shadow: 0 4px 14px rgba(255, 106, 0, 0.1) !important;
+}
+
+.hero-jd-btn:hover {
+  background: #ff6a00 !important;
+  color: white !important;
+  border-color: #ff6a00 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.3) !important;
+}
+
+.hero-jd-btn svg {
+  transition: var(--transition);
+}
+
+.hero-jd-btn:hover svg rect {
+  fill: white !important;
+}
+
+.hero-jd-btn:hover svg text {
+  fill: #ff6a00 !important;
+}
+
 /* Equipments Section */
 .equipments-section {
   padding: 100px 0;
@@ -1264,9 +1367,29 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   /* Keep grids in 2 columns on mobile instead of stacking to 1 column */
-  .services-grid, .ambulances-grid, .equipments-grid {
+  .services-grid, .equipments-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px !important;
+  }
+  
+  .ambulances-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .ambulance-card .ambulance-img-wrapper {
+    height: 240px !important;
+  }
+  
+  .ambulance-actions {
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+  
+  .ambulance-actions .btn {
+    flex: 1 !important;
+    font-size: 0.85rem !important;
+    padding: 10px 8px !important;
   }
   
   .service-card, .ambulance-card, .equipment-card {
@@ -1396,9 +1519,18 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   /* Keep 2 columns on very narrow screens too */
-  .services-grid, .ambulances-grid, .equipments-grid {
+  .services-grid, .equipments-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
+  }
+  
+  .ambulances-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .ambulance-card .ambulance-img-wrapper {
+    height: 180px !important;
   }
   
   .service-card, .ambulance-card, .equipment-card {
