@@ -161,6 +161,49 @@
             color: #10b981;
             margin-bottom: 24px;
         }
+
+        .upi-apps-title {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .upi-apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .upi-app-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            width: 100%;
+        }
+
+        .upi-app-btn:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.03);
+            transform: translateY(-1px);
+        }
+
+        .upi-app-btn svg {
+            flex-shrink: 0;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -211,13 +254,8 @@
                     <h3>Select Payment Method</h3>
 
                     <div class="payment-options">
-                        <label class="payment-option active" id="label-card">
-                            <input type="radio" name="paymentType" value="card" checked
-                                onchange="togglePayment('card')">
-                            Card
-                        </label>
-                        <label class="payment-option" id="label-upi">
-                            <input type="radio" name="paymentType" value="upi" onchange="togglePayment('upi')">
+                        <label class="payment-option active" id="label-upi">
+                            <input type="radio" name="paymentType" value="upi" checked onchange="togglePayment('upi')">
                             UPI
                         </label>
                         <label class="payment-option" id="label-cod">
@@ -226,36 +264,33 @@
                         </label>
                     </div>
 
-                    <!-- Card Section -->
-                    <div id="section-card" class="payment-section active">
-                        <div class="form-group">
-                            <label for="cardName">Name on Card</label>
-                            <input type="text" id="cardName" placeholder="Jane Doe">
-                        </div>
-                        <div class="form-group">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="expDate">Expiry Date</label>
-                                <input type="text" id="expDate" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" placeholder="123">
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- UPI Section -->
-                    <div id="section-upi" class="payment-section">
+                    <div id="section-upi" class="payment-section active">
                         <div style="text-align: center; margin-bottom: 24px;">
                             <img src="images/qr.png" alt="PhonePe QR Code"
                                 style="max-width: 250px; display: block; margin: 0 auto 16px auto; border: 1px solid rgba(0,0,0,0.1); padding: 12px; border-radius: 8px; background: white;">
-                            <p style="font-weight: 600; font-size: 1.1rem; color: #1e293b; margin-bottom: 4px;">UPI
-                                Name: PREETI CHANDRU SATTU</p>
-                            <p style="color: #64748b; font-size: 0.95rem;">Scan & Pay Using PhonePe App</p>
+                            <p style="font-weight: 600; font-size: 1.1rem; color: #1e293b; margin-bottom: 4px;">UPI Name: PREETI CHANDRU SATTU</p>
+                            <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 20px;">Scan & Pay Using PhonePe App</p>
+                            
+                            <p class="upi-apps-title">Or Pay Directly via UPI App (Mobile Only):</p>
+                            <div class="upi-apps-grid">
+                                <button type="button" class="upi-app-btn" onclick="payViaUPI('phonepe')">
+                                    <img src="images/phonepe_logo.png" alt="PhonePe" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                    <span>PhonePe</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="payViaUPI('paytm')">
+                                    <img src="images/paytm_logo.png" alt="Paytm" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                    <span>Paytm</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="payViaUPI('gpay')">
+                                    <img src="images/gpay_logo.png" alt="GPay" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                    <span>GPay</span>
+                                </button>
+                                <button type="button" class="upi-app-btn" onclick="payViaUPI('other')">
+                                    <img src="images/upi_logo.png" alt="Other UPI" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                    <span>Other UPI</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="upiRef">Enter UTR / Transaction Reference Number</label>
@@ -326,6 +361,33 @@
             }
         }
 
+        window.payViaUPI = function(app) {
+            const upiId = '7090609139@ybl';
+            const payeeName = encodeURIComponent('PREETI CHANDRU SATTU');
+            const amount = '2000.00';
+            const note = encodeURIComponent('Sri Siddharoodha Ambulance Rental');
+            
+            let baseUri = 'upi://pay';
+            if (app === 'phonepe') {
+                baseUri = 'phonepe://pay';
+            } else if (app === 'paytm') {
+                baseUri = 'paytmmp://pay';
+            } else if (app === 'gpay') {
+                baseUri = 'gpay://upi/pay';
+            }
+            
+            const upiUrl = `${baseUri}?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
+            
+            // Check if user is on mobile
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                window.location.href = upiUrl;
+            } else {
+                alert(`To pay using ${app === 'phonepe' ? 'PhonePe' : app === 'paytm' ? 'Paytm' : app === 'gpay' ? 'Google Pay' : 'UPI'}, please scan the QR Code on your screen with your mobile app.`);
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             // Retrieve equipment name from localStorage
             const equipment = localStorage.getItem('booking_equipment');
@@ -340,7 +402,7 @@
 
                 // Determine payment type
                 const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
-                
+
                 // Validate UPI screenshot if UPI is selected
                 if (paymentType === 'upi') {
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
@@ -352,6 +414,7 @@
 
                 // Retrieve customer details
                 const custName = localStorage.getItem('booking_name') || 'Customer';
+                const custAge = localStorage.getItem('booking_age') || 'N/A';
                 const custPhone = localStorage.getItem('booking_phone') || 'N/A';
                 const custAddress = localStorage.getItem('booking_address') || 'N/A';
                 const equip = localStorage.getItem('booking_equipment') || 'Equipment';
@@ -370,7 +433,7 @@
 
                 // Construct WhatsApp message
                 const ownerNumber = "917090609139";
-                const message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                const message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Age:* ${custAge}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
 
                 const encodedMessage = encodeURIComponent(message);
                 const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodedMessage}`;

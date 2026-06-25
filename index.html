@@ -311,6 +311,10 @@
                         <input type="text" id="customerName" required placeholder="John Doe">
                     </div>
                     <div class="form-group">
+                        <label for="customerAge">Age</label>
+                        <input type="number" id="customerAge" required placeholder="Age" min="0" max="120">
+                    </div>
+                    <div class="form-group">
                         <label for="customerPhone">Phone Number</label>
                         <input type="tel" id="customerPhone" required placeholder="1234567890">
                     </div>
@@ -374,6 +378,11 @@
                             style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
                     </div>
                     <div class="form-group">
+                        <label for="patientAge">Patient Age</label>
+                        <input type="number" id="patientAge" required placeholder="Age" class="form-control" min="0" max="120"
+                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
+                    </div>
+                    <div class="form-group">
                         <label for="mobileNumber">Mobile Number</label>
                         <input type="tel" id="mobileNumber" required placeholder="10-digit mobile number"
                             class="form-control"
@@ -409,12 +418,7 @@
                         <input type="datetime-local" id="bookingDateTime" required class="form-control"
                             style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem;">
                     </div>
-                    <div class="form-group">
-                        <label for="additionalNotes">Additional Notes (Optional)</label>
-                        <textarea id="additionalNotes" rows="2" placeholder="Any specific requirements..."
-                            class="form-control"
-                            style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
-                    </div>
+
                     <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Confirm
                         Booking</button>
                 </form>

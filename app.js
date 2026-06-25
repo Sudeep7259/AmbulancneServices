@@ -236,11 +236,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const equipment = nameLabel ? nameLabel.textContent.replace('Selected: ', '') : 'Equipment';
             
             const custName = document.getElementById('customerName').value;
+            const custAge = document.getElementById('customerAge').value;
             const custPhone = document.getElementById('customerPhone').value;
             const custAddress = addressInput.value;
             
             localStorage.setItem('booking_equipment', equipment);
             localStorage.setItem('booking_name', custName);
+            localStorage.setItem('booking_age', custAge);
             localStorage.setItem('booking_phone', custPhone);
             localStorage.setItem('booking_address', custAddress);
             
@@ -258,22 +260,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Collect form data
             const ambType = document.getElementById('ambType') ? document.getElementById('ambType').value : '';
             const patientName = document.getElementById('patientName') ? document.getElementById('patientName').value : '';
+            const patientAge = document.getElementById('patientAge') ? document.getElementById('patientAge').value : '';
             const mobileNumber = document.getElementById('mobileNumber') ? document.getElementById('mobileNumber').value : '';
             const pickupLocation = document.getElementById('pickupLocation') ? document.getElementById('pickupLocation').value : '';
             const destLocation = document.getElementById('destLocation') ? document.getElementById('destLocation').value : '';
             const bookingDateTime = document.getElementById('bookingDateTime') ? document.getElementById('bookingDateTime').value : '';
-            const additionalNotes = document.getElementById('additionalNotes') ? document.getElementById('additionalNotes').value : '';
-
             // Format message for WhatsApp
             const message = `*New Ambulance Booking Request* 🚑
             
 *Ambulance Type:* ${ambType}
 *Patient Name:* ${patientName}
+*Patient Age:* ${patientAge}
 *Mobile Number:* ${mobileNumber}
 *Pickup Location:* ${pickupLocation}
 *Destination:* ${destLocation}
 *Date & Time:* ${bookingDateTime ? new Date(bookingDateTime).toLocaleString() : ''}
-${additionalNotes ? `*Notes:* ${additionalNotes}` : ''}
 
 Please confirm the booking.`;
 
