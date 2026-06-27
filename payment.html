@@ -162,6 +162,14 @@
             margin-bottom: 24px;
         }
 
+        .upi-payment-wrapper {
+            background: var(--bg-subtle);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
         .upi-apps-title {
             font-size: 0.95rem;
             color: var(--text-muted);
@@ -174,7 +182,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-top: 16px;
+            margin-top: 12px;
+            margin-bottom: 24px;
         }
 
         .upi-app-btn {
@@ -183,7 +192,7 @@
             justify-content: center;
             gap: 10px;
             padding: 12px 16px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(0, 0, 0, 0.08);
             border-radius: var(--radius-md);
             background: var(--bg-surface);
             font-weight: 600;
@@ -200,9 +209,210 @@
             transform: translateY(-1px);
         }
 
-        .upi-app-btn svg {
+        .upi-app-btn svg, .upi-app-btn img {
             flex-shrink: 0;
             border-radius: 4px;
+        }
+
+        .upi-app-btn.active[data-app="phonepe"] {
+            border-color: #5f259f;
+            background: rgba(95, 37, 159, 0.05);
+            box-shadow: 0 0 0 2px rgba(95, 37, 159, 0.1);
+            color: #5f259f;
+        }
+
+        .upi-app-btn.active[data-app="paytm"] {
+            border-color: #00baf2;
+            background: rgba(0, 186, 242, 0.05);
+            box-shadow: 0 0 0 2px rgba(0, 186, 242, 0.1);
+            color: #002970;
+        }
+
+        .upi-app-btn.active[data-app="gpay"] {
+            border-color: #4285f4;
+            background: rgba(66, 133, 244, 0.05);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+            color: #1a73e8;
+        }
+
+        .upi-app-btn.active[data-app="other"] {
+            border-color: #097969;
+            background: rgba(9, 121, 105, 0.05);
+            box-shadow: 0 0 0 2px rgba(9, 121, 105, 0.1);
+            color: #097969;
+        }
+
+        /* QR Container Styling */
+        .qr-container-card {
+            background: var(--bg-surface);
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            max-width: 320px;
+            margin: 0 auto 24px auto;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Theme border highlight */
+        .qr-container-card.theme-phonepe { border-color: #5f259f; }
+        .qr-container-card.theme-paytm { border-color: #00baf2; }
+        .qr-container-card.theme-gpay { border-color: #4285f4; }
+        .qr-container-card.theme-other { border-color: #097969; }
+
+        .qr-header {
+            margin-bottom: 16px;
+        }
+
+        .qr-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .theme-phonepe .qr-badge { background: #5f259f; }
+        .theme-paytm .qr-badge { background: #002970; }
+        .theme-gpay .qr-badge { background: #1a73e8; }
+        .theme-other .qr-badge { background: #097969; }
+
+        .qr-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 16px auto;
+            background: white;
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Scanner animation line */
+        .qr-scanner-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            opacity: 0.7;
+            animation: scan 2.5s linear infinite;
+            pointer-events: none;
+            box-shadow: 0 0 8px 1px var(--primary);
+        }
+
+        .theme-phonepe .qr-scanner-lines {
+            background: #5f259f;
+            box-shadow: 0 0 8px 1px #5f259f;
+        }
+        .theme-paytm .qr-scanner-lines {
+            background: #00baf2;
+            box-shadow: 0 0 8px 1px #00baf2;
+        }
+        .theme-gpay .qr-scanner-lines {
+            background: #4285f4;
+            box-shadow: 0 0 8px 1px #4285f4;
+        }
+        .theme-other .qr-scanner-lines {
+            background: #097969;
+            box-shadow: 0 0 8px 1px #097969;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
+
+        .qr-details {
+            margin-bottom: 12px;
+        }
+
+        .payee-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .payee-upi {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+
+        .payment-amount-display {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .payment-amount-display span {
+            color: var(--primary-dark);
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .qr-instructions {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 12px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .mobile-pay-wrapper {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        #mobile-pay-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        #mobile-pay-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.95);
+        }
+
+        /* Show/hide mobile pay based on resolution */
+        @media (min-width: 769px) {
+            .mobile-pay-wrapper {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-pay-wrapper {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -266,32 +476,55 @@
 
                     <!-- UPI Section -->
                     <div id="section-upi" class="payment-section active">
-                        <div style="text-align: center; margin-bottom: 24px;">
-                            <img src="images/qr.png" alt="PhonePe QR Code"
-                                style="max-width: 250px; display: block; margin: 0 auto 16px auto; border: 1px solid rgba(0,0,0,0.1); padding: 12px; border-radius: 8px; background: white;">
-                            <p style="font-weight: 600; font-size: 1.1rem; color: #1e293b; margin-bottom: 4px;">UPI Name: PREETI CHANDRU SATTU</p>
-                            <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 20px;">Scan & Pay Using PhonePe App</p>
-                            
-                            <p class="upi-apps-title">Or Pay Directly via UPI App (Mobile Only):</p>
+                        <div class="upi-payment-wrapper">
+                            <p class="upi-apps-title">Select UPI App to Pay</p>
                             <div class="upi-apps-grid">
-                                <button type="button" class="upi-app-btn" onclick="payViaUPI('phonepe')">
-                                    <img src="images/phonepe_logo.png" alt="PhonePe" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                <button type="button" class="upi-app-btn active" data-app="phonepe" onclick="selectUPIApp('phonepe', true)">
+                                    <img src="images/phonepe_logo.png" alt="PhonePe" style="width: 24px; height: 24px; object-fit: contain;">
                                     <span>PhonePe</span>
                                 </button>
-                                <button type="button" class="upi-app-btn" onclick="payViaUPI('paytm')">
-                                    <img src="images/paytm_logo.png" alt="Paytm" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
+                                <button type="button" class="upi-app-btn" data-app="paytm" onclick="selectUPIApp('paytm', true)">
+                                    <img src="images/paytm_logo.png" alt="Paytm" style="width: 24px; height: 24px; object-fit: contain;">
                                     <span>Paytm</span>
                                 </button>
-                                <button type="button" class="upi-app-btn" onclick="payViaUPI('gpay')">
-                                    <img src="images/gpay_logo.png" alt="GPay" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
-                                    <span>GPay</span>
+                                <button type="button" class="upi-app-btn" data-app="gpay" onclick="selectUPIApp('gpay', true)">
+                                    <img src="images/gpay_logo.png" alt="GPay" style="width: 24px; height: 24px; object-fit: contain;">
+                                    <span>Google Pay</span>
                                 </button>
-                                <button type="button" class="upi-app-btn" onclick="payViaUPI('other')">
-                                    <img src="images/upi_logo.png" alt="Other UPI" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">
-                                    <span>Other UPI</span>
+                                <button type="button" class="upi-app-btn" data-app="other" onclick="selectUPIApp('other', true)">
+                                    <img src="images/upi_logo.png" alt="Other UPI" style="width: 24px; height: 24px; object-fit: contain;">
+                                    <span>Any UPI App</span>
+                                </button>
+                            </div>
+
+                            <!-- Interactive QR Code Container -->
+                            <div class="qr-container-card theme-phonepe" id="qr-container-card">
+                                <div class="qr-header">
+                                    <span class="qr-badge" id="qr-badge-app">PhonePe</span>
+                                </div>
+                                <div class="qr-wrapper">
+                                    <img id="upi-qr-image" src="" alt="Dynamic UPI QR Code">
+                                    <div class="qr-scanner-lines"></div>
+                                </div>
+                                <div class="qr-details">
+                                    <p class="payee-name" id="payee-name-display">PREETI CHANDRU SATTU</p>
+                                    <p class="payee-upi" id="payee-upi-display">7090609139@ybl</p>
+                                    <p class="payment-amount-display">Amount: <span id="payment-amount-val">₹2000.00</span></p>
+                                </div>
+                                <div class="qr-instructions" id="qr-instructions">
+                                    Scan & Pay using PhonePe App
+                                </div>
+                            </div>
+
+                            <!-- Mobile Quick Launch Button -->
+                            <div class="mobile-pay-wrapper">
+                                <button type="button" id="mobile-pay-btn" onclick="triggerMobilePay()" style="background-color: #5f259f; border-color: #5f259f; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: white;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                                    <span>Pay ₹2000.00 via PhonePe App</span>
                                 </button>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="upiRef">Enter UTR / Transaction Reference Number</label>
                             <input type="text" id="upiRef" placeholder="e.g. 123456789012">
@@ -300,8 +533,7 @@
                             <label for="upiScreenshot">Upload Payment Screenshot</label>
                             <input type="file" id="upiScreenshot" accept="image/*" style="background: white;">
                         </div>
-                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">After scanning and paying, please
-                            enter the reference number and attach the screenshot above.</p>
+                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">After scanning and paying, please enter the reference number and attach the screenshot above.</p>
                     </div>
 
                     <!-- COD Section -->
@@ -361,31 +593,109 @@
             }
         }
 
-        window.payViaUPI = function(app) {
+        let currentSelectedApp = 'phonepe';
+
+        window.selectUPIApp = function(app, isUserClick = false) {
+            currentSelectedApp = app;
+
+            // Update active state in selector buttons
+            document.querySelectorAll('.upi-app-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const selectedBtn = document.querySelector(`.upi-app-btn[data-app="${app}"]`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
+
+            // Update QR Code container theme
+            const qrCard = document.getElementById('qr-container-card');
+            if (qrCard) {
+                qrCard.className = 'qr-container-card theme-' + app;
+            }
+
+            // Update Badge and instruction texts
+            const badge = document.getElementById('qr-badge-app');
+            const instructions = document.getElementById('qr-instructions');
+            const mobilePayBtn = document.getElementById('mobile-pay-btn');
+
+            let appName = 'UPI App';
+            let themeColor = '#5f259f'; // PhonePe
+
+            if (app === 'phonepe') {
+                appName = 'PhonePe';
+                themeColor = '#5f259f';
+            } else if (app === 'paytm') {
+                appName = 'Paytm';
+                themeColor = '#00baf2';
+            } else if (app === 'gpay') {
+                appName = 'Google Pay';
+                themeColor = '#4285f4';
+            } else if (app === 'other') {
+                appName = 'Any UPI';
+                themeColor = '#097969';
+            }
+
+            if (badge) badge.textContent = appName;
+            if (instructions) instructions.textContent = `Scan & Pay using ${appName} App`;
+            
+            // Dynamic mobile button styling to match the selected app
+            if (mobilePayBtn) {
+                mobilePayBtn.style.backgroundColor = themeColor;
+                mobilePayBtn.style.borderColor = themeColor;
+                const mobilePayBtnSpan = mobilePayBtn.querySelector('span');
+                if (mobilePayBtnSpan) {
+                    mobilePayBtnSpan.textContent = `Pay ₹2000.00 via ${appName} App`;
+                }
+            }
+
+            // If user clicked and is on mobile, open app directly
+            if (isUserClick) {
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                if (isMobile) {
+                    triggerMobilePay();
+                }
+            }
+        };
+
+        window.triggerMobilePay = function() {
             const upiId = '7090609139@ybl';
             const payeeName = encodeURIComponent('PREETI CHANDRU SATTU');
             const amount = '2000.00';
-            const note = encodeURIComponent('Sri Siddharoodha Ambulance Rental');
-            
+            const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
+            const note = encodeURIComponent(`${equipment} Rental Deposit`);
+
+            // Use corresponding custom URI scheme for each selected app
             let baseUri = 'upi://pay';
-            if (app === 'phonepe') {
+            if (currentSelectedApp === 'phonepe') {
                 baseUri = 'phonepe://pay';
-            } else if (app === 'paytm') {
+            } else if (currentSelectedApp === 'paytm') {
                 baseUri = 'paytmmp://pay';
-            } else if (app === 'gpay') {
+            } else if (currentSelectedApp === 'gpay') {
                 baseUri = 'gpay://upi/pay';
             }
-            
+
             const upiUrl = `${baseUri}?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
+            window.location.href = upiUrl;
+        };
+
+        window.initUPIQRCode = function() {
+            const upiId = '7090609139@ybl';
+            const payeeName = 'PREETI CHANDRU SATTU';
+            const amount = '2000.00';
+            const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
+            const note = `${equipment} Rental Deposit`;
             
-            // Check if user is on mobile
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            // Standard universal UPI link
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
             
-            if (isMobile) {
-                window.location.href = upiUrl;
-            } else {
-                alert(`To pay using ${app === 'phonepe' ? 'PhonePe' : app === 'paytm' ? 'Paytm' : app === 'gpay' ? 'Google Pay' : 'UPI'}, please scan the QR Code on your screen with your mobile app.`);
+            // Generate QR Code URL using free qrserver API
+            const qrImage = document.getElementById('upi-qr-image');
+            if (qrImage) {
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}&ecc=M&margin=10`;
             }
+
+            // Set default active tab
+            selectUPIApp('phonepe', false);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -394,6 +704,9 @@
             if (equipment) {
                 document.getElementById('equipment-name-display').textContent = equipment + ' Rental';
             }
+
+            // Initialize dynamic UPI QR Code
+            initUPIQRCode();
 
             // Handle mock payment submission
             const form = document.getElementById('payment-form');
