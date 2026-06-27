@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const custPhone = document.getElementById('customerPhone').value;
             const custAddress = addressInput.value;
             
+            localStorage.setItem('booking_type', 'equipment');
             localStorage.setItem('booking_equipment', equipment);
             localStorage.setItem('booking_name', custName);
             localStorage.setItem('booking_age', custAge);
@@ -265,38 +266,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const pickupLocation = document.getElementById('pickupLocation') ? document.getElementById('pickupLocation').value : '';
             const destLocation = document.getElementById('destLocation') ? document.getElementById('destLocation').value : '';
             const bookingDateTime = document.getElementById('bookingDateTime') ? document.getElementById('bookingDateTime').value : '';
-            // Format message for WhatsApp
-            const message = `*New Ambulance Booking Request* 🚑
-            
-*Ambulance Type:* ${ambType}
-*Patient Name:* ${patientName}
-*Patient Age:* ${patientAge}
-*Mobile Number:* ${mobileNumber}
-*Pickup Location:* ${pickupLocation}
-*Destination:* ${destLocation}
-*Date & Time:* ${bookingDateTime ? new Date(bookingDateTime).toLocaleString() : ''}
 
-Please confirm the booking.`;
-
-            // Encode the message for URL
-            const encodedMessage = encodeURIComponent(message);
+            // Save selected ambulance and user details to localStorage
+            localStorage.setItem('booking_type', 'ambulance');
+            localStorage.setItem('booking_ambulance_type', ambType);
+            localStorage.setItem('booking_patient_name', patientName);
+            localStorage.setItem('booking_patient_age', patientAge);
+            localStorage.setItem('booking_phone', mobileNumber);
+            localStorage.setItem('booking_pickup', pickupLocation);
+            localStorage.setItem('booking_destination', destLocation);
+            localStorage.setItem('booking_datetime', bookingDateTime);
             
-            // Owner's WhatsApp number (with country code +91)
-            const ownerNumber = "917090609139"; 
-            
-            // Open WhatsApp link in a new tab
-            window.open(`https://wa.me/${ownerNumber}?text=${encodedMessage}`, '_blank');
-
-            // Show success message, hide form
-            const successMsg = document.getElementById('ambulance-booking-success');
-            if (successMsg) {
-                ambForm.style.display = 'none';
-                successMsg.style.display = 'flex';
-                successMsg.style.flexDirection = 'column';
-                successMsg.style.alignItems = 'center';
-                successMsg.style.textAlign = 'center';
-                successMsg.style.padding = '32px 0';
-            }
+            // Redirect to payment page
+            window.location.href = 'payment.html';
         });
     }
 

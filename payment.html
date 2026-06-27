@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280">
-    <title>Secure Payment - Sri Siddharoodha Ambulance</title>
+    <title>Secure Payment - Sri Siddharoodha Ambulance & Health Care Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -88,6 +88,38 @@
         }
 
         .payment-option input {
+            display: none;
+        }
+
+        .amount-options {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .amount-option {
+            flex: 1;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .amount-option:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .amount-option.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .amount-option input {
             display: none;
         }
 
@@ -414,10 +446,114 @@
                 display: block;
             }
         }
+
+        .terms-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .terms-modal-card {
+            background: var(--bg-surface);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            transform: scale(1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terms-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .terms-modal-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .terms-icon {
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .terms-modal-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            overflow-y: auto;
+            padding-right: 8px;
+            text-align: left;
+        }
+
+        .terms-modal-body ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .terms-modal-body li {
+            margin-bottom: 12px;
+        }
+
+        .terms-modal-footer {
+            flex-shrink: 0;
+        }
+
+        .terms-modal-footer button {
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Terms & Conditions Modal Popup Overlay -->
+    <div id="terms-modal-overlay" class="terms-modal-overlay">
+        <div class="terms-modal-card">
+            <div class="terms-modal-header">
+                <svg class="terms-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <line x1="10" y1="9" x2="8" y2="9"/>
+                </svg>
+                <h2>Booking Terms & Conditions</h2>
+            </div>
+            <div class="terms-modal-body" id="terms-modal-content">
+                <!-- Dynamically loaded terms list -->
+            </div>
+            <div class="terms-modal-footer">
+                <button type="button" class="btn btn-primary btn-large" id="accept-terms-btn" onclick="acceptTerms()">
+                    I Agree & Accept Terms
+                </button>
+            </div>
+        </div>
+    </div>
+
     <header class="header">
         <div class="container header-content">
             <div class="logo">
@@ -432,7 +568,7 @@
                     <path d="M12 7v4" />
                     <path d="M10 9h4" />
                 </svg>
-                <span>Sri Siddharoodha Ambulance</span>
+                <span>Sri Siddharoodha Ambulance & Health Care Services</span>
             </div>
             <nav class="nav">
                 <a href="index.html" class="nav-link">Back to Home</a>
@@ -455,11 +591,43 @@
                 </div>
                 <div class="summary-item total">
                     <span>Total Deposit</span>
-                    <span>₹2000.00</span>
+                    <span id="summary-total-val">₹2000.00</span>
                 </div>
             </div>
 
             <form id="payment-form">
+                <!-- Select Payment Amount Section -->
+                <div class="payment-amount-selector-section" style="margin-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 24px;">
+                    <h3 style="margin-bottom: 16px;">Select Payment Amount</h3>
+                    <div class="amount-options">
+                        <label class="amount-option active" id="label-amt-standard">
+                            <input type="radio" name="paymentAmountType" value="standard" checked onchange="toggleAmountType('standard')">
+                            <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 4px;">Standard Deposit</div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);">₹2000.00</div>
+                        </label>
+                        <label class="amount-option" id="label-amt-custom">
+                            <input type="radio" name="paymentAmountType" value="custom" onchange="toggleAmountType('custom')">
+                            <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 4px;">Custom Amount</div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);" id="custom-amount-preview-display">₹2000.00</div>
+                        </label>
+                    </div>
+
+                    <!-- Custom Amount Input Field (hidden by default) -->
+                    <div id="custom-amount-input-container" style="display: none; background: var(--bg-subtle); padding: 20px; border-radius: var(--radius-md); border: 1px solid rgba(0, 0, 0, 0.05); margin-top: 12px; transition: all 0.3s ease;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="custom-amount-val-input" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-muted);">Enter Custom Amount (₹)</label>
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <span style="position: absolute; left: 16px; font-size: 1.25rem; font-weight: 600; color: var(--text-muted);">₹</span>
+                                <input type="number" id="custom-amount-val-input" min="300" step="any" value="2000" placeholder="Enter amount to pay" style="width: 100%; padding: 12px 12px 12px 36px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: var(--radius-sm); font-size: 1.15rem; font-weight: 600; background: var(--bg-surface); outline: none; transition: border-color 0.2s ease;" oninput="updateCustomAmount(this.value)">
+                            </div>
+                            <div id="custom-amount-warning" style="display: none; color: #dc2626; font-size: 0.85rem; font-weight: 600; margin-top: 8px;">
+                                ⚠️ Minimum payment amount is ₹300.00
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">Specify any custom amount you want to pay as advance or full payment.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="payment-method">
                     <h3>Select Payment Method</h3>
 
@@ -546,7 +714,7 @@
                             <div class="mobile-pay-wrapper">
                                 <button type="button" id="mobile-pay-btn" onclick="triggerMobilePay()" style="background-color: #5f259f; border-color: #5f259f; display: flex; align-items: center; justify-content: center; gap: 8px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: white;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-                                    <span>Pay ₹2000.00 via PhonePe App</span>
+                                    <span id="mobile-pay-btn-text">Pay ₹2000.00 via PhonePe App</span>
                                 </button>
                             </div>
                         </div>
@@ -566,8 +734,7 @@
                     <div id="section-cod" class="payment-section">
                         <p
                             style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1;">
-                            You have selected Cash on Delivery. Please keep ₹2000.00 ready at the time of equipment
-                            delivery.</p>
+                            You have selected Cash on Delivery. Please keep <strong id="cod-amount-val">₹2000.00</strong> ready at the time of equipment delivery.</p>
                     </div>
                 </div>
 
@@ -601,25 +768,188 @@
     </div>
 
     <script>
-        function togglePayment(type) {
-            // Update labels
-            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('active'));
-            document.getElementById('label-' + type).classList.add('active');
+        let currentSelectedApp = 'phonepe';
+        let paymentAmountType = 'standard';
+        let customAmountVal = 2000.00;
 
-            // Update sections
-            document.querySelectorAll('.payment-section').forEach(el => el.classList.remove('active'));
-            document.getElementById('section-' + type).classList.add('active');
-
-            // Update button text
-            const btn = document.getElementById('submit-btn');
-            if (type === 'cod') {
-                btn.textContent = 'Confirm Order (Pay on Delivery)';
+        function getSelectedAmount() {
+            if (paymentAmountType === 'standard') {
+                return 2000.00;
             } else {
-                btn.textContent = 'Pay ₹2000.00 Securely';
+                return customAmountVal;
             }
         }
 
-        let currentSelectedApp = 'phonepe';
+        window.acceptTerms = function() {
+            const overlay = document.getElementById('terms-modal-overlay');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+            }
+            
+            // Automatically accept the checkout form terms checkbox
+            const chk = document.getElementById('terms-accept');
+            if (chk) {
+                chk.checked = true;
+            }
+        };
+
+        window.toggleAmountType = function(type) {
+            paymentAmountType = type;
+
+            // Update active state in selector buttons
+            document.getElementById('label-amt-standard').classList.remove('active');
+            document.getElementById('label-amt-custom').classList.remove('active');
+            document.getElementById('label-amt-' + type).classList.add('active');
+
+            // Show/hide custom input
+            const inputContainer = document.getElementById('custom-amount-input-container');
+            if (type === 'custom') {
+                inputContainer.style.display = 'block';
+                const inputVal = document.getElementById('custom-amount-val-input');
+                if (inputVal && !inputVal.value) {
+                    inputVal.value = '2000';
+                }
+            } else {
+                inputContainer.style.display = 'none';
+            }
+
+            updatePaymentAmount();
+        };
+
+        window.updateCustomAmount = function(val) {
+            let parsed = parseFloat(val);
+            if (isNaN(parsed) || parsed < 0) {
+                parsed = 0;
+            }
+            customAmountVal = parsed;
+            updatePaymentAmount();
+        };
+
+        function updatePaymentAmount() {
+            const amount = getSelectedAmount();
+            const formattedAmount = '₹' + amount.toFixed(2);
+
+            const isAmountInvalid = (paymentAmountType === 'custom' && amount < 300);
+
+            // Update warning visibility
+            const warningEl = document.getElementById('custom-amount-warning');
+            if (warningEl) {
+                warningEl.style.display = isAmountInvalid ? 'block' : 'none';
+            }
+
+            // Update displays
+            const summaryTotal = document.getElementById('summary-total-val');
+            if (summaryTotal) summaryTotal.textContent = formattedAmount;
+
+            const payAmtVal = document.getElementById('payment-amount-val');
+            if (payAmtVal) payAmtVal.textContent = formattedAmount;
+
+            // Update COD message
+            const codAmtVal = document.getElementById('cod-amount-val');
+            if (codAmtVal) codAmtVal.textContent = formattedAmount;
+
+            // Update submit button text and state
+            const submitBtn = document.getElementById('submit-btn');
+            const checkedPaymentTypeEl = document.querySelector('input[name="paymentType"]:checked');
+            const paymentType = checkedPaymentTypeEl ? checkedPaymentTypeEl.value : 'upi';
+            if (submitBtn) {
+                if (isAmountInvalid) {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.6';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.textContent = 'Minimum ₹300.00 Required';
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                    if (paymentType === 'cod') {
+                        submitBtn.textContent = 'Confirm Order (Pay on Delivery)';
+                    } else {
+                        submitBtn.textContent = `Pay ${formattedAmount} Securely`;
+                    }
+                }
+            }
+
+            // Update mobile pay button span
+            const mobileBtnText = document.getElementById('mobile-pay-btn-text');
+            if (mobileBtnText) {
+                let appName = 'UPI App';
+                if (currentSelectedApp === 'phonepe') appName = 'PhonePe';
+                else if (currentSelectedApp === 'paytm') appName = 'Paytm';
+                else if (currentSelectedApp === 'gpay') appName = 'Google Pay';
+                else if (currentSelectedApp === 'other') appName = 'Any UPI';
+                
+                if (isAmountInvalid) {
+                    mobileBtnText.textContent = `Minimum ₹300.00 Required`;
+                } else {
+                    mobileBtnText.textContent = `Pay ${formattedAmount} via ${appName} App`;
+                }
+            }
+
+            // Disable mobile pay button if amount is invalid
+            const mobilePayBtn = document.getElementById('mobile-pay-btn');
+            if (mobilePayBtn) {
+                if (isAmountInvalid) {
+                    mobilePayBtn.style.opacity = '0.5';
+                    mobilePayBtn.style.pointerEvents = 'none';
+                } else {
+                    mobilePayBtn.style.opacity = '1';
+                    mobilePayBtn.style.pointerEvents = 'auto';
+                }
+            }
+
+            // Regenerate QR Code
+            const qrImage = document.getElementById('upi-qr-image');
+            if (qrImage) {
+                if (isAmountInvalid) {
+                    qrImage.style.opacity = '0.3';
+                } else {
+                    qrImage.style.opacity = '1';
+                    const upiId = '12412010054879@CNRB0001382.ifsc.npci';
+                    const payeeName = 'CHANDRU SATTUR';
+                    
+                    const bookingType = localStorage.getItem('booking_type') || 'equipment';
+                    let noteText = '';
+                    if (bookingType === 'ambulance') {
+                        const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
+                        noteText = `${ambType} Booking Deposit`;
+                    } else {
+                        const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
+                        noteText = `${equipment} Rental Deposit`;
+                    }
+                    
+                    const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(noteText)}`;
+                    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}&ecc=M&margin=10`;
+                }
+            }
+
+            // Also update the custom amount preview text in the radio button
+            const preview = document.getElementById('custom-amount-preview-display');
+            if (preview) {
+                preview.textContent = formattedAmount;
+            }
+        }
+
+        window.togglePayment = function(type) {
+            // Update labels
+            document.querySelectorAll('.payment-method .payment-option').forEach(el => el.classList.remove('active'));
+            const selectedLabel = document.getElementById('label-' + type);
+            if (selectedLabel) {
+                selectedLabel.classList.add('active');
+            }
+
+            // Update sections
+            document.querySelectorAll('.payment-section').forEach(el => el.classList.remove('active'));
+            const selectedSection = document.getElementById('section-' + type);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            updatePaymentAmount();
+        };
 
         window.selectUPIApp = function(app, isUserClick = false) {
             currentSelectedApp = app;
@@ -668,11 +998,9 @@
             if (mobilePayBtn) {
                 mobilePayBtn.style.backgroundColor = themeColor;
                 mobilePayBtn.style.borderColor = themeColor;
-                const mobilePayBtnSpan = mobilePayBtn.querySelector('span');
-                if (mobilePayBtnSpan) {
-                    mobilePayBtnSpan.textContent = `Pay ₹2000.00 via ${appName} App`;
-                }
             }
+
+            updatePaymentAmount();
 
             // Update Bank Details card border color dynamically
             const bankCard = document.querySelector('.bank-details-card');
@@ -692,9 +1020,18 @@
         window.triggerMobilePay = function() {
             const upiId = '12412010054879@CNRB0001382.ifsc.npci';
             const payeeName = encodeURIComponent('CHANDRU SATTUR');
-            const amount = '2000.00';
-            const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
-            const note = encodeURIComponent(`${equipment} Rental Deposit`);
+            const amount = getSelectedAmount().toFixed(2);
+            
+            const bookingType = localStorage.getItem('booking_type') || 'equipment';
+            let noteText = '';
+            if (bookingType === 'ambulance') {
+                const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
+                noteText = `${ambType} Booking Deposit`;
+            } else {
+                const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
+                noteText = `${equipment} Rental Deposit`;
+            }
+            const note = encodeURIComponent(noteText);
 
             // Use corresponding custom URI scheme for each selected app
             let baseUri = 'upi://pay';
@@ -711,30 +1048,63 @@
         };
 
         window.initUPIQRCode = function() {
-            const upiId = '12412010054879@CNRB0001382.ifsc.npci';
-            const payeeName = 'CHANDRU SATTUR';
-            const amount = '2000.00';
-            const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
-            const note = `${equipment} Rental Deposit`;
-            
-            // Standard universal UPI link
-            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
-            
-            // Generate QR Code URL using free qrserver API
-            const qrImage = document.getElementById('upi-qr-image');
-            if (qrImage) {
-                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}&ecc=M&margin=10`;
-            }
-
+            updatePaymentAmount();
             // Set default active tab
             selectUPIApp('phonepe', false);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve equipment name from localStorage
-            const equipment = localStorage.getItem('booking_equipment');
-            if (equipment) {
-                document.getElementById('equipment-name-display').textContent = equipment + ' Rental';
+            // Retrieve booking type and detail from localStorage
+            const bookingType = localStorage.getItem('booking_type') || 'equipment';
+            
+            // Dynamically populate Terms modal list content
+            const termsContent = document.getElementById('terms-modal-content');
+            if (termsContent) {
+                if (bookingType === 'ambulance') {
+                    termsContent.innerHTML = `
+                        <p style="margin-top:0; margin-bottom:14px; font-weight:600; color:var(--text-muted);">Please read and accept these simple rules before paying:</p>
+                        <ol style="margin:0; padding-left:20px;">
+                            <li style="margin-bottom:10px;"><strong>Booking Deposit:</strong> This payment is paid in advance to confirm your booking.</li>
+                            <li style="margin-bottom:10px;"><strong>Extra Charges:</strong> Rest of the charges (for distance and staff) must be paid at the pickup or drop location.</li>
+                            <li style="margin-bottom:10px;"><strong>Correct Details:</strong> Please make sure the patient details, pickup location, and drop location are correct.</li>
+                            <li style="margin-bottom:10px;"><strong>Cancellation Fees:</strong> If you cancel after the ambulance has started from our base, basic charges will apply.</li>
+                            <li style="margin-bottom:0;"><strong>No Refund on Arrival:</strong> If you cancel after the ambulance has reached your pickup location, the deposit will not be refunded.</li>
+                        </ol>
+                    `;
+                } else {
+                    termsContent.innerHTML = `
+                        <p style="margin-top:0; margin-bottom:14px; font-weight:600; color:var(--text-muted);">Please read and accept these simple rules before paying:</p>
+                        <ol style="margin:0; padding-left:20px;">
+                            <li style="margin-bottom:10px;"><strong>Safety Deposit:</strong> This deposit is paid in advance to secure the medical equipment. It is fully refundable.</li>
+                            <li style="margin-bottom:10px;"><strong>Rental Fees:</strong> The actual rental charges must be paid when the equipment is delivered.</li>
+                            <li style="margin-bottom:10px;"><strong>Equipment Care:</strong> Please return the equipment in clean, dry, and working condition.</li>
+                            <li style="margin-bottom:10px;"><strong>Damages or Loss:</strong> Any damage or lost parts will be charged from your safety deposit.</li>
+                            <li style="margin-bottom:0;"><strong>No Refund on Arrival:</strong> If you cancel after the equipment has reached your location, the deposit will not be refunded.</li>
+                        </ol>
+                    `;
+                }
+            }
+
+            if (bookingType === 'ambulance') {
+                const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
+                document.getElementById('equipment-name-display').textContent = ambType + ' Booking';
+                
+                // Update payment header description
+                const subHeader = document.querySelector('.payment-header p');
+                if (subHeader) {
+                    subHeader.textContent = 'Complete your ambulance transport booking';
+                }
+
+                // Update terms and conditions checkbox text
+                const termsLabel = document.querySelector('label[for="terms-accept"]');
+                if (termsLabel) {
+                    termsLabel.textContent = 'Advance payment has been received for the ambulance booking. The remaining charges will be collected at the transport location.';
+                }
+            } else {
+                const equipment = localStorage.getItem('booking_equipment');
+                if (equipment) {
+                    document.getElementById('equipment-name-display').textContent = equipment + ' Rental';
+                }
             }
 
             // Initialize dynamic UPI QR Code
@@ -744,6 +1114,16 @@
             const form = document.getElementById('payment-form');
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
+
+                const amount = getSelectedAmount();
+                if (paymentAmountType === 'custom' && amount < 300) {
+                    alert("Please enter an amount of ₹300.00 or greater.");
+                    return;
+                }
+                if (amount <= 0) {
+                    alert("Please enter a valid payment amount.");
+                    return;
+                }
 
                 // Determine payment type
                 const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
@@ -757,28 +1137,42 @@
                     }
                 }
 
-                // Retrieve customer details
-                const custName = localStorage.getItem('booking_name') || 'Customer';
-                const custAge = localStorage.getItem('booking_age') || 'N/A';
-                const custPhone = localStorage.getItem('booking_phone') || 'N/A';
-                const custAddress = localStorage.getItem('booking_address') || 'N/A';
-                const equip = localStorage.getItem('booking_equipment') || 'Equipment';
-
                 // Show success overlay first
                 document.getElementById('success-overlay').classList.add('active');
 
-                let paymentStatus = "Payment of ₹2000.00 Successful ✅";
+                let paymentStatus = `Payment of ₹${amount.toFixed(2)} Successful ✅`;
                 if (paymentType === 'cod') {
-                    paymentStatus = "Cash on Delivery (₹2000.00 due) 🚚";
+                    paymentStatus = `Cash on Delivery (₹${amount.toFixed(2)} due) 🚚`;
                 } else if (paymentType === 'upi') {
                     const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
-                    paymentStatus = `UPI Payment of ₹2000.00 Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
+                    paymentStatus = `UPI Payment of ₹${amount.toFixed(2)} Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
                 }
 
-                // Construct WhatsApp message
+                // Construct WhatsApp message dynamically based on booking type
                 const ownerNumber = "917090609139";
-                const message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Age:* ${custAge}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                let message = '';
+
+                if (bookingType === 'ambulance') {
+                    const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
+                    const patientName = localStorage.getItem('booking_patient_name') || 'N/A';
+                    const patientAge = localStorage.getItem('booking_patient_age') || 'N/A';
+                    const phone = localStorage.getItem('booking_phone') || 'N/A';
+                    const pickup = localStorage.getItem('booking_pickup') || 'N/A';
+                    const destination = localStorage.getItem('booking_destination') || 'N/A';
+                    const datetimeVal = localStorage.getItem('booking_datetime');
+                    const datetime = datetimeVal ? new Date(datetimeVal).toLocaleString() : 'N/A';
+
+                    message = `*PAYMENT RECEIPT & AMBULANCE BOOKING DETAILS*\n\n*Ambulance Type:* ${ambType}\n*Patient Name:* ${patientName}\n*Age:* ${patientAge}\n*Phone:* ${phone}\n*Pickup Location:* ${pickup}\n*Destination:* ${destination}\n*Date & Time:* ${datetime}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                } else {
+                    const equip = localStorage.getItem('booking_equipment') || 'Equipment';
+                    const custName = localStorage.getItem('booking_name') || 'Customer';
+                    const custAge = localStorage.getItem('booking_age') || 'N/A';
+                    const custPhone = localStorage.getItem('booking_phone') || 'N/A';
+                    const custAddress = localStorage.getItem('booking_address') || 'N/A';
+
+                    message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Age:* ${custAge}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                }
 
                 const encodedMessage = encodeURIComponent(message);
                 const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodedMessage}`;

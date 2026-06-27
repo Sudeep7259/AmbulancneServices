@@ -928,6 +928,39 @@ h1, h2, h3, h4, h5, h6 {
   fill: #ff6a00 !important;
 }
 
+/* Hero Map Location Button */
+.hero-map-btn {
+  border: 1px solid rgba(37, 99, 235, 0.3) !important;
+  color: #2563eb !important;
+  background: rgba(37, 99, 235, 0.05) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1) !important;
+}
+
+.hero-map-btn:hover {
+  background: #2563eb !important;
+  color: white !important;
+  border-color: #2563eb !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
+}
+
+.location-badge {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.15);
+}
+
+.location-badge:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.location-badge:hover svg {
+  stroke: white !important;
+}
+
 /* Equipments Section */
 .equipments-section {
   padding: 100px 0;
