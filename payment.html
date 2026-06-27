@@ -498,7 +498,7 @@
                             </div>
 
                             <!-- Interactive QR Code Container -->
-                            <div class="qr-container-card theme-phonepe" id="qr-container-card">
+                            <div class="qr-container-card theme-phonepe" id="qr-container-card" onclick="triggerMobilePay()" style="cursor: pointer;" title="Click to pay via app">
                                 <div class="qr-header">
                                     <span class="qr-badge" id="qr-badge-app">PhonePe</span>
                                 </div>
@@ -507,12 +507,38 @@
                                     <div class="qr-scanner-lines"></div>
                                 </div>
                                 <div class="qr-details">
-                                    <p class="payee-name" id="payee-name-display">PREETI CHANDRU SATTU</p>
-                                    <p class="payee-upi" id="payee-upi-display">7090609139@ybl</p>
+                                    <p class="payee-name" id="payee-name-display">CHANDRU SATTUR</p>
+                                    <p class="payee-upi" id="payee-upi-display" style="word-break: break-all; font-size: 0.75rem;">12412010054879@CNRB0001382.ifsc.npci</p>
                                     <p class="payment-amount-display">Amount: <span id="payment-amount-val">₹2000.00</span></p>
                                 </div>
                                 <div class="qr-instructions" id="qr-instructions">
                                     Scan & Pay using PhonePe App
+                                </div>
+                            </div>
+
+                            <!-- Bank Account Details Card -->
+                            <div class="bank-details-card" style="background: var(--bg-surface); border: 2px solid #5f259f; border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 24px auto; box-shadow: var(--shadow-sm); transition: border-color 0.2s ease;">
+                                <h4 style="margin-top: 0; margin-bottom: 12px; color: var(--primary-dark); font-size: 0.95rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                                    Bank Transfer Details
+                                </h4>
+                                <div style="text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text-main);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="color: var(--text-muted); font-weight: 500;">Bank Name:</span>
+                                        <strong style="color: var(--text-main); font-weight: 600;">Canara Bank</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="color: var(--text-muted); font-weight: 500;">Account Holder:</span>
+                                        <strong style="color: var(--text-main); font-weight: 600;">CHANDRU SATTUR</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="color: var(--text-muted); font-weight: 500;">Account No:</span>
+                                        <strong style="color: var(--text-main); font-family: monospace; font-size: 0.9rem; font-weight: 600;">12412010054879</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="color: var(--text-muted); font-weight: 500;">IFSC Code:</span>
+                                        <strong style="color: var(--text-main); font-family: monospace; font-size: 0.9rem; font-weight: 600;">CNRB0001382</strong>
+                                    </div>
                                 </div>
                             </div>
 
@@ -648,6 +674,12 @@
                 }
             }
 
+            // Update Bank Details card border color dynamically
+            const bankCard = document.querySelector('.bank-details-card');
+            if (bankCard) {
+                bankCard.style.borderColor = themeColor;
+            }
+
             // If user clicked and is on mobile, open app directly
             if (isUserClick) {
                 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -658,8 +690,8 @@
         };
 
         window.triggerMobilePay = function() {
-            const upiId = '7090609139@ybl';
-            const payeeName = encodeURIComponent('PREETI CHANDRU SATTU');
+            const upiId = '12412010054879@CNRB0001382.ifsc.npci';
+            const payeeName = encodeURIComponent('CHANDRU SATTUR');
             const amount = '2000.00';
             const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
             const note = encodeURIComponent(`${equipment} Rental Deposit`);
@@ -679,8 +711,8 @@
         };
 
         window.initUPIQRCode = function() {
-            const upiId = '7090609139@ybl';
-            const payeeName = 'PREETI CHANDRU SATTU';
+            const upiId = '12412010054879@CNRB0001382.ifsc.npci';
+            const payeeName = 'CHANDRU SATTUR';
             const amount = '2000.00';
             const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
             const note = `${equipment} Rental Deposit`;
