@@ -632,13 +632,9 @@
                     <h3>Select Payment Method</h3>
 
                     <div class="payment-options">
-                        <label class="payment-option active" id="label-upi">
-                            <input type="radio" name="paymentType" value="upi" checked onchange="togglePayment('upi')">
-                            UPI
-                        </label>
-                        <label class="payment-option" id="label-bank">
-                            <input type="radio" name="paymentType" value="bank" onchange="togglePayment('bank')">
-                            Bank Transfer
+                        <label class="payment-option active" id="label-bank">
+                            <input type="radio" name="paymentType" value="bank" checked onchange="togglePayment('bank')">
+                            Online Payment (UPI / Bank Transfer)
                         </label>
                         <label class="payment-option" id="label-cod">
                             <input type="radio" name="paymentType" value="cod" onchange="togglePayment('cod')">
@@ -646,67 +642,14 @@
                         </label>
                     </div>
 
-                    <!-- UPI Section -->
-                    <div id="section-upi" class="payment-section active">
-                        <div class="upi-payment-wrapper">
-                            <p class="upi-apps-title">Select UPI App to Pay</p>
-                            <div class="upi-apps-grid">
-                                <button type="button" class="upi-app-btn active" data-app="phonepe" onclick="selectUPIApp('phonepe', true)">
-                                    <img src="images/phonepe_logo.png" alt="PhonePe" style="width: 24px; height: 24px; object-fit: contain;">
-                                    <span>PhonePe</span>
-                                </button>
-                                <button type="button" class="upi-app-btn" data-app="paytm" onclick="selectUPIApp('paytm', true)">
-                                    <img src="images/paytm_logo.png" alt="Paytm" style="width: 24px; height: 24px; object-fit: contain;">
-                                    <span>Paytm</span>
-                                </button>
-                                <button type="button" class="upi-app-btn" data-app="gpay" onclick="selectUPIApp('gpay', true)">
-                                    <img src="images/gpay_logo.png" alt="GPay" style="width: 24px; height: 24px; object-fit: contain;">
-                                    <span>Google Pay</span>
-                                </button>
-                                <button type="button" class="upi-app-btn" data-app="other" onclick="selectUPIApp('other', true)">
-                                    <img src="images/upi_logo.png" alt="Other UPI" style="width: 24px; height: 24px; object-fit: contain;">
-                                    <span>Any UPI App</span>
-                                </button>
-                            </div>
-
-                            <!-- Interactive QR Code Container -->
-                            <div class="qr-container-card theme-phonepe" id="qr-container-card" onclick="triggerMobilePay()" style="cursor: pointer;" title="Click to pay via app">
-                                <div class="qr-header">
-                                    <span class="qr-badge" id="qr-badge-app">PhonePe</span>
-                                </div>
-                                <div class="qr-wrapper">
-                                    <img id="upi-qr-image" src="" alt="Dynamic UPI QR Code">
-                                    <div class="qr-scanner-lines"></div>
-                                </div>
-                                <div class="qr-details">
-                                    <p class="payee-name" id="payee-name-display">CHANDRU SATTUR</p>
-                                    <p class="payee-bank" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Bank Name: PhonePe UPI</p>
-                                    <p class="payee-upi" id="payee-upi-display" style="word-break: break-all; font-size: 0.85rem; font-weight: 700;">7090609139@ybl</p>
-                                    <p class="payment-amount-display">Amount: <span id="payment-amount-val">₹2000.00</span></p>
-                                </div>
-                                <div class="qr-instructions" id="qr-instructions">
-                                    Scan & Pay using PhonePe App
-                                </div>
-                            </div>
-
-                            <!-- Mobile Quick Launch Button -->
-                            <div class="mobile-pay-wrapper">
-                                <button type="button" id="mobile-pay-btn" onclick="triggerMobilePay()" style="background-color: #5f259f; border-color: #5f259f; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: white;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-                                    <span id="mobile-pay-btn-text">Pay ₹2000.00 via PhonePe App</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bank Transfer Section -->
-                    <div id="section-bank" class="payment-section">
+                    <!-- Bank Transfer Section (Online Payment Details) -->
+                    <div id="section-bank" class="payment-section active">
                         <div class="upi-payment-wrapper" style="padding: 24px 16px;">
                             <!-- Bank Account Details Card -->
                             <div class="bank-details-card" style="background: var(--bg-surface); border: 2px solid #5f259f; border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 12px auto; box-shadow: var(--shadow-sm); transition: border-color 0.2s ease;">
                                 <h4 style="margin-top: 0; margin-bottom: 12px; color: var(--primary-dark); font-size: 0.95rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-                                    Bank Transfer Details
+                                    Bank Account details
                                 </h4>
                                 <div style="text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text-main);">
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
@@ -748,7 +691,7 @@
                         <label for="upiScreenshot">Upload Payment Screenshot</label>
                         <input type="file" id="upiScreenshot" accept="image/*" style="background: white;">
                     </div>
-                    <p id="screenshot-instruction-text" style="font-size: 0.85rem; color: #64748b; margin-top: 12px; margin-bottom: 0; font-weight: 500;">After scanning and paying, please enter the reference number and attach the screenshot above.</p>
+                    <p id="screenshot-instruction-text" style="font-size: 0.85rem; color: #64748b; margin-top: 12px; margin-bottom: 0; font-weight: 500;">After transferring to the bank account above, please enter the reference/UTR number and attach the receipt screenshot.</p>
                 </div>
 
                 <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 24px; margin-bottom: 24px;">
@@ -781,7 +724,6 @@
     </div>
 
     <script>
-        let currentSelectedApp = 'phonepe';
         let paymentAmountType = 'standard';
         let customAmountVal = 2000.00;
 
@@ -857,9 +799,6 @@
             const summaryTotal = document.getElementById('summary-total-val');
             if (summaryTotal) summaryTotal.textContent = formattedAmount;
 
-            const payAmtVal = document.getElementById('payment-amount-val');
-            if (payAmtVal) payAmtVal.textContent = formattedAmount;
-
             // Update COD message
             const codAmtVal = document.getElementById('cod-amount-val');
             if (codAmtVal) codAmtVal.textContent = formattedAmount;
@@ -867,7 +806,7 @@
             // Update submit button text and state
             const submitBtn = document.getElementById('submit-btn');
             const checkedPaymentTypeEl = document.querySelector('input[name="paymentType"]:checked');
-            const paymentType = checkedPaymentTypeEl ? checkedPaymentTypeEl.value : 'upi';
+            const paymentType = checkedPaymentTypeEl ? checkedPaymentTypeEl.value : 'bank';
             if (submitBtn) {
                 if (isAmountInvalid) {
                     submitBtn.disabled = true;
@@ -880,64 +819,9 @@
                     submitBtn.style.cursor = 'pointer';
                     if (paymentType === 'cod') {
                         submitBtn.textContent = 'Confirm Order (Pay on Delivery)';
-                    } else if (paymentType === 'bank') {
+                    } else {
                         submitBtn.textContent = `Confirm Booking via Bank Transfer`;
-                    } else {
-                        submitBtn.textContent = `Pay ${formattedAmount} Securely`;
                     }
-                }
-            }
-
-            // Update mobile pay button span
-            const mobileBtnText = document.getElementById('mobile-pay-btn-text');
-            if (mobileBtnText) {
-                let appName = 'UPI App';
-                if (currentSelectedApp === 'phonepe') appName = 'PhonePe';
-                else if (currentSelectedApp === 'paytm') appName = 'Paytm';
-                else if (currentSelectedApp === 'gpay') appName = 'Google Pay';
-                else if (currentSelectedApp === 'other') appName = 'Any UPI';
-                
-                if (isAmountInvalid) {
-                    mobileBtnText.textContent = `Minimum ₹300.00 Required`;
-                } else {
-                    mobileBtnText.textContent = `Pay ${formattedAmount} via ${appName} App`;
-                }
-            }
-
-            // Disable mobile pay button if amount is invalid
-            const mobilePayBtn = document.getElementById('mobile-pay-btn');
-            if (mobilePayBtn) {
-                if (isAmountInvalid) {
-                    mobilePayBtn.style.opacity = '0.5';
-                    mobilePayBtn.style.pointerEvents = 'none';
-                } else {
-                    mobilePayBtn.style.opacity = '1';
-                    mobilePayBtn.style.pointerEvents = 'auto';
-                }
-            }
-
-            // Regenerate QR Code
-            const qrImage = document.getElementById('upi-qr-image');
-            if (qrImage) {
-                if (isAmountInvalid) {
-                    qrImage.style.opacity = '0.3';
-                } else {
-                    qrImage.style.opacity = '1';
-                    const upiId = '7090609139@ybl';
-                    const payeeName = 'CHANDRU SATTUR';
-                    
-                    const bookingType = localStorage.getItem('booking_type') || 'equipment';
-                    let noteText = '';
-                    if (bookingType === 'ambulance') {
-                        const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
-                        noteText = `${ambType} Booking Deposit`;
-                    } else {
-                        const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
-                        noteText = `${equipment} Rental Deposit`;
-                    }
-                    
-                    const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(noteText)}`;
-                    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}&ecc=M&margin=10`;
                 }
             }
 
@@ -965,125 +849,15 @@
 
             // Show/hide screenshot upload container based on selected payment type
             const uploadContainer = document.getElementById('screenshot-upload-container');
-            const instructionText = document.getElementById('screenshot-instruction-text');
             if (uploadContainer) {
-                if (type === 'upi' || type === 'bank') {
+                if (type === 'bank') {
                     uploadContainer.style.display = 'block';
-                    if (instructionText) {
-                        if (type === 'upi') {
-                            instructionText.textContent = 'After scanning and paying, please enter the reference number and attach the screenshot above.';
-                        } else {
-                            instructionText.textContent = 'After transferring to the bank account above, please enter the reference/UTR number and attach the receipt screenshot.';
-                        }
-                    }
                 } else {
                     uploadContainer.style.display = 'none';
                 }
             }
 
             updatePaymentAmount();
-        };
-
-        window.selectUPIApp = function(app, isUserClick = false) {
-            currentSelectedApp = app;
-
-            // Update active state in selector buttons
-            document.querySelectorAll('.upi-app-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            const selectedBtn = document.querySelector(`.upi-app-btn[data-app="${app}"]`);
-            if (selectedBtn) {
-                selectedBtn.classList.add('active');
-            }
-
-            // Update QR Code container theme
-            const qrCard = document.getElementById('qr-container-card');
-            if (qrCard) {
-                qrCard.className = 'qr-container-card theme-' + app;
-            }
-
-            // Update Badge and instruction texts
-            const badge = document.getElementById('qr-badge-app');
-            const instructions = document.getElementById('qr-instructions');
-            const mobilePayBtn = document.getElementById('mobile-pay-btn');
-
-            let appName = 'UPI App';
-            let themeColor = '#5f259f'; // PhonePe
-
-            if (app === 'phonepe') {
-                appName = 'PhonePe';
-                themeColor = '#5f259f';
-            } else if (app === 'paytm') {
-                appName = 'Paytm';
-                themeColor = '#00baf2';
-            } else if (app === 'gpay') {
-                appName = 'Google Pay';
-                themeColor = '#4285f4';
-            } else if (app === 'other') {
-                appName = 'Any UPI';
-                themeColor = '#097969';
-            }
-
-            if (badge) badge.textContent = appName;
-            if (instructions) instructions.textContent = `Scan & Pay using ${appName} App`;
-            
-            // Dynamic mobile button styling to match the selected app
-            if (mobilePayBtn) {
-                mobilePayBtn.style.backgroundColor = themeColor;
-                mobilePayBtn.style.borderColor = themeColor;
-            }
-
-            updatePaymentAmount();
-
-            // Update Bank Details card border color dynamically
-            const bankCard = document.querySelector('.bank-details-card');
-            if (bankCard) {
-                bankCard.style.borderColor = themeColor;
-            }
-
-            // If user clicked and is on mobile, open app directly
-            if (isUserClick) {
-                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                if (isMobile) {
-                    triggerMobilePay();
-                }
-            }
-        };
-
-        window.triggerMobilePay = function() {
-            const upiId = '7090609139@ybl';
-            const payeeName = encodeURIComponent('CHANDRU SATTUR');
-            const amount = getSelectedAmount().toFixed(2);
-            
-            const bookingType = localStorage.getItem('booking_type') || 'equipment';
-            let noteText = '';
-            if (bookingType === 'ambulance') {
-                const ambType = localStorage.getItem('booking_ambulance_type') || 'Ambulance';
-                noteText = `${ambType} Booking Deposit`;
-            } else {
-                const equipment = localStorage.getItem('booking_equipment') || 'Medical Equipment';
-                noteText = `${equipment} Rental Deposit`;
-            }
-            const note = encodeURIComponent(noteText);
-
-            // Use corresponding custom URI scheme for each selected app
-            let baseUri = 'upi://pay';
-            if (currentSelectedApp === 'phonepe') {
-                baseUri = 'phonepe://pay';
-            } else if (currentSelectedApp === 'paytm') {
-                baseUri = 'paytmmp://pay';
-            } else if (currentSelectedApp === 'gpay') {
-                baseUri = 'gpay://upi/pay';
-            }
-
-            const upiUrl = `${baseUri}?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
-            window.location.href = upiUrl;
-        };
-
-        window.initUPIQRCode = function() {
-            updatePaymentAmount();
-            // Set default active tab
-            selectUPIApp('phonepe', false);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1140,8 +914,8 @@
                 }
             }
 
-            // Initialize dynamic UPI QR Code
-            initUPIQRCode();
+            // Initialize dynamic payment details
+            updatePaymentAmount();
 
             // Handle payment submission
             const form = document.getElementById('payment-form');
@@ -1161,8 +935,8 @@
                 // Determine payment type
                 const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
 
-                // Validate UPI / Bank Transfer screenshot if selected
-                if (paymentType === 'upi' || paymentType === 'bank') {
+                // Validate Bank Transfer screenshot if selected
+                if (paymentType === 'bank') {
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
                     if (!hasScreenshot) {
                         alert("Please upload the payment screenshot before proceeding.");
@@ -1176,10 +950,6 @@
                 let paymentStatus = `Payment of ₹${amount.toFixed(2)} Successful ✅`;
                 if (paymentType === 'cod') {
                     paymentStatus = `Cash on Delivery (₹${amount.toFixed(2)} due) 🚚`;
-                } else if (paymentType === 'upi') {
-                    const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
-                    const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
-                    paymentStatus = `UPI Payment of ₹${amount.toFixed(2)} Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
                 } else if (paymentType === 'bank') {
                     const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
