@@ -636,6 +636,10 @@
                             <input type="radio" name="paymentType" value="upi" checked onchange="togglePayment('upi')">
                             UPI
                         </label>
+                        <label class="payment-option" id="label-bank">
+                            <input type="radio" name="paymentType" value="bank" onchange="togglePayment('bank')">
+                            Bank Transfer
+                        </label>
                         <label class="payment-option" id="label-cod">
                             <input type="radio" name="paymentType" value="cod" onchange="togglePayment('cod')">
                             Cash on Delivery
@@ -676,6 +680,7 @@
                                 </div>
                                 <div class="qr-details">
                                     <p class="payee-name" id="payee-name-display">CHANDRU SATTUR</p>
+                                    <p class="payee-bank" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Bank Name: Canara Bank</p>
                                     <p class="payee-upi" id="payee-upi-display" style="word-break: break-all; font-size: 0.75rem;">12412010054879@CNRB0001382.ifsc.npci</p>
                                     <p class="payment-amount-display">Amount: <span id="payment-amount-val">₹2000.00</span></p>
                                 </div>
@@ -684,8 +689,21 @@
                                 </div>
                             </div>
 
+                            <!-- Mobile Quick Launch Button -->
+                            <div class="mobile-pay-wrapper">
+                                <button type="button" id="mobile-pay-btn" onclick="triggerMobilePay()" style="background-color: #5f259f; border-color: #5f259f; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: white;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                                    <span id="mobile-pay-btn-text">Pay ₹2000.00 via PhonePe App</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Section -->
+                    <div id="section-bank" class="payment-section">
+                        <div class="upi-payment-wrapper" style="padding: 24px 16px;">
                             <!-- Bank Account Details Card -->
-                            <div class="bank-details-card" style="background: var(--bg-surface); border: 2px solid #5f259f; border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 24px auto; box-shadow: var(--shadow-sm); transition: border-color 0.2s ease;">
+                            <div class="bank-details-card" style="background: var(--bg-surface); border: 2px solid #5f259f; border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 12px auto; box-shadow: var(--shadow-sm); transition: border-color 0.2s ease;">
                                 <h4 style="margin-top: 0; margin-bottom: 12px; color: var(--primary-dark); font-size: 0.95rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
                                     Bank Transfer Details
@@ -709,33 +727,28 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Mobile Quick Launch Button -->
-                            <div class="mobile-pay-wrapper">
-                                <button type="button" id="mobile-pay-btn" onclick="triggerMobilePay()" style="background-color: #5f259f; border-color: #5f259f; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: white;"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-                                    <span id="mobile-pay-btn-text">Pay ₹2000.00 via PhonePe App</span>
-                                </button>
-                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="upiRef">Enter UTR / Transaction Reference Number</label>
-                            <input type="text" id="upiRef" placeholder="e.g. 123456789012">
-                        </div>
-                        <div class="form-group">
-                            <label for="upiScreenshot">Upload Payment Screenshot</label>
-                            <input type="file" id="upiScreenshot" accept="image/*" style="background: white;">
-                        </div>
-                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 8px;">After scanning and paying, please enter the reference number and attach the screenshot above.</p>
                     </div>
 
                     <!-- COD Section -->
                     <div id="section-cod" class="payment-section">
                         <p
-                            style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 0;">
                             You have selected Cash on Delivery. Please keep <strong id="cod-amount-val">₹2000.00</strong> ready at the time of equipment delivery.</p>
                     </div>
+                </div>
+
+                <!-- Transaction Reference & Screenshot Upload (shared for UPI & Bank Transfer) -->
+                <div id="screenshot-upload-container" style="display: block; background: var(--bg-subtle); border: 1px solid rgba(0, 0, 0, 0.05); border-radius: var(--radius-md); padding: 24px; margin-top: 24px;">
+                    <div class="form-group">
+                        <label for="upiRef">Enter UTR / Transaction Reference Number</label>
+                        <input type="text" id="upiRef" placeholder="e.g. 123456789012">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="upiScreenshot">Upload Payment Screenshot</label>
+                        <input type="file" id="upiScreenshot" accept="image/*" style="background: white;">
+                    </div>
+                    <p id="screenshot-instruction-text" style="font-size: 0.85rem; color: #64748b; margin-top: 12px; margin-bottom: 0; font-weight: 500;">After scanning and paying, please enter the reference number and attach the screenshot above.</p>
                 </div>
 
                 <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 24px; margin-bottom: 24px;">
@@ -867,6 +880,8 @@
                     submitBtn.style.cursor = 'pointer';
                     if (paymentType === 'cod') {
                         submitBtn.textContent = 'Confirm Order (Pay on Delivery)';
+                    } else if (paymentType === 'bank') {
+                        submitBtn.textContent = `Confirm Booking via Bank Transfer`;
                     } else {
                         submitBtn.textContent = `Pay ${formattedAmount} Securely`;
                     }
@@ -932,7 +947,6 @@
                 preview.textContent = formattedAmount;
             }
         }
-
         window.togglePayment = function(type) {
             // Update labels
             document.querySelectorAll('.payment-method .payment-option').forEach(el => el.classList.remove('active'));
@@ -946,6 +960,24 @@
             const selectedSection = document.getElementById('section-' + type);
             if (selectedSection) {
                 selectedSection.classList.add('active');
+            }
+
+            // Show/hide screenshot upload container based on selected payment type
+            const uploadContainer = document.getElementById('screenshot-upload-container');
+            const instructionText = document.getElementById('screenshot-instruction-text');
+            if (uploadContainer) {
+                if (type === 'upi' || type === 'bank') {
+                    uploadContainer.style.display = 'block';
+                    if (instructionText) {
+                        if (type === 'upi') {
+                            instructionText.textContent = 'After scanning and paying, please enter the reference number and attach the screenshot above.';
+                        } else {
+                            instructionText.textContent = 'After transferring to the bank account above, please enter the reference/UTR number and attach the receipt screenshot.';
+                        }
+                    }
+                } else {
+                    uploadContainer.style.display = 'none';
+                }
             }
 
             updatePaymentAmount();
@@ -1128,8 +1160,8 @@
                 // Determine payment type
                 const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
 
-                // Validate UPI screenshot if UPI is selected
-                if (paymentType === 'upi') {
+                // Validate UPI / Bank Transfer screenshot if selected
+                if (paymentType === 'upi' || paymentType === 'bank') {
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
                     if (!hasScreenshot) {
                         alert("Please upload the payment screenshot before proceeding.");
@@ -1147,6 +1179,10 @@
                     const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
                     const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
                     paymentStatus = `UPI Payment of ₹${amount.toFixed(2)} Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
+                } else if (paymentType === 'bank') {
+                    const utr = document.getElementById('upiRef') ? document.getElementById('upiRef').value : '';
+                    const hasScreenshot = document.getElementById('upiScreenshot') && document.getElementById('upiScreenshot').files.length > 0;
+                    paymentStatus = `Bank Transfer of ₹${amount.toFixed(2)} Successful ✅\n*UTR / Ref No:* ${utr || 'Not provided'}\n*Screenshot:* ${hasScreenshot ? 'Has Screenshot (Please attach below)' : 'Not uploaded'}`;
                 }
 
                 // Construct WhatsApp message dynamically based on booking type
