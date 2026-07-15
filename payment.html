@@ -680,8 +680,8 @@
                                 </div>
                                 <div class="qr-details">
                                     <p class="payee-name" id="payee-name-display">CHANDRU SATTUR</p>
-                                    <p class="payee-bank" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Bank Name: Canara Bank</p>
-                                    <p class="payee-upi" id="payee-upi-display" style="word-break: break-all; font-size: 0.75rem;">12412010054879@CNRB0001382.ifsc.npci</p>
+                                    <p class="payee-bank" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600;">Bank Name: PhonePe UPI</p>
+                                    <p class="payee-upi" id="payee-upi-display" style="word-break: break-all; font-size: 0.85rem; font-weight: 700;">7090609139@ybl</p>
                                     <p class="payment-amount-display">Amount: <span id="payment-amount-val">₹2000.00</span></p>
                                 </div>
                                 <div class="qr-instructions" id="qr-instructions">
@@ -733,7 +733,7 @@
                     <!-- COD Section -->
                     <div id="section-cod" class="payment-section">
                         <p
-                            style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 0;">
+                            style="font-size: 0.95rem; color: #334155; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 0; text-align: center;">
                             You have selected Cash on Delivery. Please keep <strong id="cod-amount-val">₹2000.00</strong> ready at the time of equipment delivery.</p>
                     </div>
                 </div>
@@ -923,7 +923,7 @@
                     qrImage.style.opacity = '0.3';
                 } else {
                     qrImage.style.opacity = '1';
-                    const upiId = '12412010054879@CNRB0001382.ifsc.npci';
+                    const upiId = '7090609139@ybl';
                     const payeeName = 'CHANDRU SATTUR';
                     
                     const bookingType = localStorage.getItem('booking_type') || 'equipment';
@@ -947,6 +947,7 @@
                 preview.textContent = formattedAmount;
             }
         }
+
         window.togglePayment = function(type) {
             // Update labels
             document.querySelectorAll('.payment-method .payment-option').forEach(el => el.classList.remove('active'));
@@ -1050,7 +1051,7 @@
         };
 
         window.triggerMobilePay = function() {
-            const upiId = '12412010054879@CNRB0001382.ifsc.npci';
+            const upiId = '7090609139@ybl';
             const payeeName = encodeURIComponent('CHANDRU SATTUR');
             const amount = getSelectedAmount().toFixed(2);
             
@@ -1142,7 +1143,7 @@
             // Initialize dynamic UPI QR Code
             initUPIQRCode();
 
-            // Handle mock payment submission
+            // Handle payment submission
             const form = document.getElementById('payment-form');
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -1199,7 +1200,7 @@
                     const datetimeVal = localStorage.getItem('booking_datetime');
                     const datetime = datetimeVal ? new Date(datetimeVal).toLocaleString() : 'N/A';
 
-                    message = `*PAYMENT RECEIPT & AMBULANCE BOOKING DETAILS*\n\n*Ambulance Type:* ${ambType}\n*Patient Name:* ${patientName}\n*Age:* ${patientAge}\n*Phone:* ${phone}\n*Pickup Location:* ${pickup}\n*Destination:* ${destination}\n*Date & Time:* ${datetime}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                    message = `*PAYMENT RECEIPT & AMBULANCE BOOKING DETAILS*\n\n*Ambulance Type:* ${ambType}\n*Patient Name:* ${patientName}\n*Age:* ${patientAge}\n*Phone:* ${phone}\n*Pickup Location:* ${pickup}\n*Destination:* ${destination}\n*Date & Time:* ${datetime}\n\n*Status:* ${paymentStatus}`;
                 } else {
                     const equip = localStorage.getItem('booking_equipment') || 'Equipment';
                     const custName = localStorage.getItem('booking_name') || 'Customer';
@@ -1207,7 +1208,7 @@
                     const custPhone = localStorage.getItem('booking_phone') || 'N/A';
                     const custAddress = localStorage.getItem('booking_address') || 'N/A';
 
-                    message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Age:* ${custAge}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}\n\n_(Note: If you paid via UPI, please attach the screenshot to this chat)_`;
+                    message = `*PAYMENT RECEIPT & ORDER DETAILS*\n\n*Equipment:* ${equip}\n*Customer Name:* ${custName}\n*Age:* ${custAge}\n*Phone:* ${custPhone}\n*Delivery Address:* ${custAddress}\n\n*Status:* ${paymentStatus}`;
                 }
 
                 const encodedMessage = encodeURIComponent(message);
